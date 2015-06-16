@@ -18,12 +18,14 @@
 `define FUNCT_SLT 6'h2a
 
 // ALU operations
-`define ALU_OP_AND 4'b0000
-`define ALU_OP_OR  4'b0001
-`define ALU_OP_ADD 4'b0010
-`define ALU_OP_SUB 4'b0110
-`define ALU_OP_SLT 4'b0111
-`define ALU_OP_NOR 4'b1100
+`define ALU_OP_AND  4'b0000
+`define ALU_OP_OR   4'b0001
+`define ALU_OP_ADD  4'b0010
+`define ALU_OP_ADDU 4'b0011
+`define ALU_OP_SUBU 4'b0100
+`define ALU_OP_SUB  4'b0110
+`define ALU_OP_SLT  4'b0111
+`define ALU_OP_NOR  4'b1100
 
 `define ALU_SEL_REG 1'b0
 `define ALU_SEL_IMM 1'b1
