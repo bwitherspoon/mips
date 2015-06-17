@@ -15,8 +15,7 @@ module cpu_tb;
     always #(CLOCKPERIOD/2) clk <= ~clk;
 
     initial begin
-        $dumpfile("cpu.vcd");
-        $dumpvars;
+        $dumpvars(1, cpu);
         rst = 1;
         #(CLOCKPERIOD+1) rst = 0;
         #(25*CLOCKPERIOD);
