@@ -2,7 +2,7 @@
  * Copyright (c) 2015 Brett Witherspoon
  */
 
-`include "timescale.vh"
+`timescale 1ns / 1ps
 
 module decode (
     input [31:0] ir_i,

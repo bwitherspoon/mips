@@ -2,7 +2,8 @@
  * Copyright (c) 2015 Brett Witherspoon
  */
 
-`include "timescale.vh"
+`timescale 1ns / 1ps
+
 `include "defines.vh"
 
 module control (
