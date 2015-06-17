@@ -1,0 +1,28 @@
+[*]
+[*] GTKWave Analyzer v3.3.65 (w)1999-2015 BSI
+[*] Mon Jun 15 21:01:11 2015
+[*]
+[dumpfile] "/home/spoonb/repositories/mips/src/sim/mips_fetch_tb.vcd"
+[dumpfile_mtime] "Mon Jun 15 20:59:53 2015"
+[dumpfile_size] 4921
+[savefile] "/home/spoonb/repositories/mips/src/sim/mips_fetch_tb.gtkw"
+[timestart] 0
+[size] 1920 1016
+[pos] -1958 -11
+*-14.966988 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] mips_fetch_tb.
+[sst_width] 218
+[signals_width] 150
+[sst_expanded] 1
+[sst_vpaned_height] 288
+@28
+mips_fetch_tb.fetch.clk_i
+@22
+mips_fetch_tb.fetch.ir_o[31:0]
+mips_fetch_tb.fetch.pc_o[31:0]
+@28
+mips_fetch_tb.fetch.pc_load_i
+@22
+mips_fetch_tb.fetch.pc_addr_i[31:0]
+[pattern_trace] 1
+[pattern_trace] 0

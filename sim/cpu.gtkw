@@ -1,9 +1,9 @@
 [*]
 [*] GTKWave Analyzer v3.3.65 (w)1999-2015 BSI
-[*] Tue Jun 16 07:38:46 2015
+[*] Tue Jun 16 09:12:54 2015
 [*]
 [dumpfile] "/home/spoonb/repositories/mips/src/sim/cpu.vcd"
-[dumpfile_mtime] "Tue Jun 16 07:38:38 2015"
+[dumpfile_mtime] "Tue Jun 16 07:58:01 2015"
 [dumpfile_size] 10587
 [savefile] "/home/spoonb/repositories/mips/src/sim/cpu.gtkw"
 [timestart] 0
@@ -17,6 +17,8 @@
 [signals_width] 244
 [sst_expanded] 1
 [sst_vpaned_height] 279
+@200
+-Clock/Reset
 @28
 cpu_tb.cpu.clk_i
 cpu_tb.cpu.rst_i
@@ -38,8 +40,6 @@ cpu_tb.cpu.funct[5:0]
 cpu_tb.cpu.imm[31:0]
 @200
 -
-@28
-cpu_tb.cpu.pc_load
 @22
 cpu_tb.cpu.pc_data[31:0]
 cpu_tb.cpu.rs_data[31:0]
@@ -71,9 +71,8 @@ cpu_tb.cpu.regfile.rt_i[4:0]
 cpu_tb.cpu.regfile.rd_i[4:0]
 @28
 cpu_tb.cpu.regfile.rd_en_i
-@23
-cpu_tb.cpu.regfile.rd_data_i[31:0]
 @22
+cpu_tb.cpu.regfile.rd_data_i[31:0]
 cpu_tb.cpu.regfile.rs_data_o[31:0]
 cpu_tb.cpu.regfile.rt_data_o[31:0]
 @200
@@ -90,6 +89,9 @@ cpu_tb.cpu.mem_addr[4:0]
 cpu_tb.cpu.mem_data[31:0]
 @28
 cpu_tb.cpu.mem_en
+@29
+cpu_tb.cpu.pc_load
+@28
 cpu_tb.cpu.rd_data_sel
 cpu_tb.cpu.rd_en
 cpu_tb.cpu.rd_sel
