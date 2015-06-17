@@ -8,111 +8,156 @@ module cpu (
     input clk,
     input rst
 );
-    // Control path
-    wire [3:0] alu_op;         // ctl -> ex
-    wire       alu_sel;        // ctk -> ex
-    wire       alu_zero;       // ex  -> ctl
-    wire       mem_en;         // ctl -> mem
-    wire       pc_load;        // ctl -> if
-    wire       rd_en;       // ctl -> reg
-    wire       rd_addr_sel; // ctl -> id
-    wire       rd_data_sel; // ctl -> wb
+    /*
+     *  Control path
+     */
 
-    // Data path
-    wire [31:0] alu_data;    // ex -> wb
+    // id -> ex
+    wire [3:0] alu_op_id_ex;
+    wire       alu_sel_id_ex;
+    // id -> mem
+    wire       mem_en_id_ex;
+    wire       mem_en_ex_mem;
+    // id -> if
+    wire       jump;
+    // id -> reg
+    wire       rd_en_id_ex;
+    wire       rd_en_ex_mem;
+    wire       rd_en_mem_wb;
+    wire       rd_en;
+    // id -> wb
+    wire       rd_data_sel_id_ex;
+    wire       rd_data_sel_ex_mem;
+    wire       rd_data_sel_mem_wb;
 
-    wire [5:0]  opcode;      // id -> ctl
-    wire [4:0]  shamt;       // id -> ex
-    wire [5:0]  funct;       // id -> ex
-    wire [31:0] imm;         // id -> ex
+    /*
+     *  Data path
+     */
 
-    wire [31:0] pc;          // if -> ex
-    wire [31:0] pc_addr;     // ex -> if
-
-    wire [31:0] ir;          // if -> id
-
-    wire [4:0] rd;           // id -> reg
-    wire [4:0] rs;           // id -> reg
-    wire [4:0] rt;           // id -> reg
-
-    wire [31:0] rd_data;  // wb -> reg
-    wire [31:0] rs_data;  // reg -> ex
-    wire [31:0] rt_data;  // reg -> ex, reg -> mem
-
-    wire [4:0]  mem_addr;    // wb -> mem
-    wire [31:0] mem_data;    // mem -> wb
+    // id -> ex
+    wire [31:0] imm_id_ex;
+    wire [31:0] rs_data_id_ex;
+    wire [31:0] rt_data_id_ex;
+    // if -> id
+    wire [31:0] pc_if_id;
+    wire [31:0] ir_if_id;
+    // id -> if
+    wire [31:0] addr;
+    // id -> reg
+    wire [4:0] rd_addr_id_ex;
+    wire [4:0] rd_addr_ex_mem;
+    wire [4:0] rd_addr_mem_wb;
+    wire [4:0] rd_addr;
+    wire [4:0] rs_addr;
+    wire [4:0] rt_addr;
+    // wb -> reg
+    wire [31:0] rd_data;
+    // reg -> id
+    wire [31:0] rs_data;
+    wire [31:0] rt_data;
+    // ex -> mem
+    wire [31:0] alu_data_ex_mem;
+    wire [31:0] rt_data_ex_mem;
+    // mem -> wb
+    wire [31:0] alu_data_mem_wb;
+    wire [31:0] mem_data_mem_wb;
 
     fetch fetch (
         .clk(clk),
         .rst(rst),
-        .load(pc_load),
-        .addr(pc_addr),
-        .pc(pc),
-        .ir(ir)
-    );
-
-    control control (
-        .opcode(opcode),
-        .funct(funct),
-        .alu_zero(alu_zero),
-        .alu_op(alu_op),
-        .alu_sel(alu_sel),
-        .mem_en(mem_en),
-        .pc_load(pc_load),
-        .rd_addr_sel(rd_addr_sel),
-        .rd_data_sel(rd_data_sel),
-        .rd_en(rd_en)
+        // id -> if
+        .jump(jump),
+        .addr(addr),
+        // if -> id
+        .pc_if_id(pc_if_id),
+        .ir_if_id(ir_if_id)
     );
 
     decode decode (
-        .ir(ir),
-        .rd_addr_sel(rd_addr_sel),
-        .opcode(opcode),
-        .rd(rd),
-        .rs(rs),
-        .rt(rt),
-        .shamt(shamt),
-        .funct(funct),
-        .imm(imm)
+        .clk(clk),
+        // if -> id
+        .pc_if_id(pc_if_id),
+        .ir_if_id(ir_if_id),
+        // reg -> id
+        .rs_data(rs_data),
+        .rt_data(rt_data),
+        // id -> if
+        .jump(jump),
+        .addr(addr),
+        // id -> reg
+        .rs_addr(rs_addr),
+        .rt_addr(rt_addr),
+        // id -> ex
+        .imm_id_ex(imm_id_ex),
+        .rd_en_id_ex(rd_en_id_ex),
+        .rd_addr_id_ex(rd_addr_id_ex),
+        .rs_data_id_ex(rs_data_id_ex),
+        .rt_data_id_ex(rt_data_id_ex),
+        .rd_data_sel_id_ex(rd_data_sel_id_ex),
+        .alu_op_id_ex(alu_op_id_ex),
+        .alu_sel_id_ex(alu_sel_id_ex),
+        .mem_en_id_ex(mem_en_id_ex)
     );
 
     regfile regfile (
         .clk(clk),
-        .rd_addr(rd),
+        .rd_addr(rd_addr),
         .rd_data(rd_data),
         .rd_en(rd_en),
-        .rt_addr(rt),
+        .rt_addr(rt_addr),
         .rt_data(rt_data),
-        .rs_addr(rs),
+        .rs_addr(rs_addr),
         .rs_data(rs_data)
     );
 
     execute execute (
-        .alu_op(alu_op),
-        .alu_sel(alu_sel),
-        .pc(pc),
-        .shamt(shamt),
-        .imm(imm),
-        .rs_data(rs_data),
-        .rt_data(rt_data),
-        .alu_data(alu_data),
-        .alu_zero(alu_zero),
-        .pc_addr(pc_addr)
+        .clk(clk),
+        // id -> ex
+        .alu_op_id_ex(alu_op_id_ex),
+        .alu_sel_id_ex(alu_sel_id_ex),
+        .imm_id_ex(imm_id_ex),
+        .mem_en_id_ex(mem_en_id_ex),
+        .rd_en_id_ex(rd_en_id_ex),
+        .rd_addr_id_ex(rd_addr_id_ex),
+        .rd_data_sel_id_ex(rd_data_sel_id_ex),
+        .rs_data_id_ex(rs_data_id_ex),
+        .rt_data_id_ex(rt_data_id_ex),
+        // ex -> mem
+        .alu_data_ex_mem(alu_data_ex_mem),
+        .rd_en_ex_mem(rd_en_ex_mem),
+        .rd_addr_ex_mem(rd_addr_ex_mem),
+        .rd_data_sel_ex_mem(rd_data_sel_ex_mem),
+        .rt_data_ex_mem(rt_data_ex_mem),
+        .mem_en_ex_mem(mem_en_ex_mem)
     );
 
     memory memory(
         .clk(clk),
-        .addr(mem_addr),
-        .wdata(rd_data),
-        .wen(mem_en),
-        .rdata(mem_data)
+        // mem -> ex
+        .alu_data_ex_mem(alu_data_ex_mem),
+        .rd_en_ex_mem(rd_en_ex_mem),
+        .rd_addr_ex_mem(rd_addr_ex_mem),
+        .rd_data_sel_ex_mem(rd_data_sel_ex_mem),
+        .rt_data_ex_mem(rt_data_ex_mem),
+        .mem_en_ex_mem(mem_en_ex_mem),
+        // mem -> wb
+        .alu_data_mem_wb(alu_data_mem_wb),
+        .mem_data_mem_wb(mem_data_mem_wb),
+        .rd_en_mem_wb(rd_en_mem_wb),
+        .rd_addr_mem_wb(rd_addr_mem_wb),
+        .rd_data_sel_mem_wb(rd_data_sel_mem_wb)
     );
 
     write write(
-        .alu_data(alu_data),
-        .mem_data(mem_data),
-        .rd_data_sel(rd_data_sel),
-        .mem_addr(mem_addr),
+        // mem -> wb
+        .alu_data_mem_wb(alu_data_mem_wb),
+        .mem_data_mem_wb(mem_data_mem_wb),
+        .rd_en_mem_wb(rd_en_mem_wb),
+        .rd_addr_mem_wb(rd_addr_mem_wb),
+        .rd_data_sel_mem_wb(rd_data_sel_mem_wb),
+        // wb -> reg
+        .rd_en(rd_en),
+        .rd_addr(rd_addr),
         .rd_data(rd_data)
     );
 

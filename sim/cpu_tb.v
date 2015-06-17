@@ -8,17 +8,17 @@ module cpu_tb;
     reg rst;
 
     cpu cpu (
-        .clk_i(clk),
-        .rst_i(rst)
+        .clk(clk),
+        .rst(rst)
     );
 
     always #(CLOCKPERIOD/2) clk <= ~clk;
 
     initial begin
-        $dumpvars(1, cpu);
+        $dumpvars(1, cpu, cpu.decode.control, cpu.execute.alu);
         rst = 1;
         #(CLOCKPERIOD+1) rst = 0;
-        #(25*CLOCKPERIOD);
+        #(64*CLOCKPERIOD);
         $display("All tests succeeded.");
         $finish;
     end

@@ -13,8 +13,7 @@ module alu
     input      [3:0]           opcode,
     input      [WORD_SIZE-1:0] a,
     input      [WORD_SIZE-1:0] b,
-    output reg [WORD_SIZE-1:0] result,
-    output                     zero
+    output reg [WORD_SIZE-1:0] result
 );
 
     initial result = 0;
@@ -31,7 +30,5 @@ module alu
             `ALU_OP_NOR:  result = ~(a | b);
             default:      result = 0;
         endcase
-
-    assign zero = (result == 0);
 
 endmodule

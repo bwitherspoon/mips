@@ -16,6 +16,7 @@
 `define FUNCT_AND 6'h24
 `define FUNCT_OR  6'h25
 `define FUNCT_SLT 6'h2a
+`define FUNCT_NOP 6'h00
 
 // ALU operations
 `define ALU_OP_AND  4'b0000
