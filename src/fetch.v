@@ -11,24 +11,23 @@ module fetch
     parameter PROG_CODE = "rom.bin",
     parameter WORD_SIZE = 32
 )(
-    input         clk_i,
-    input         rst_i,
-    input         pc_load_i,
-    input  [WORD_SIZE-1:0] pc_data_i,
-    output [WORD_SIZE-1:0] pc_o,
-    output [WORD_SIZE-1:0] ir_o
+    input                      clk,
+    input                      rst,
+    input                      load,
+    input      [WORD_SIZE-1:0] addr,
+    output reg [WORD_SIZE-1:0] pc,
+    output     [WORD_SIZE-1:0] ir
 );
-    reg [WORD_SIZE-1:0] pc = BOOT_ADDR;
 
     reg [WORD_SIZE-1:0] rom [0:2**ADDR_SIZE-1];
 
     initial $readmemb(PROG_CODE, rom, 0, 2**ADDR_SIZE-1);
 
-    assign ir_o = rom[pc[ADDR_SIZE-1:0]];
+    initial pc = BOOT_ADDR;
 
-    assign pc_o = pc;
+    assign ir = rom[pc[ADDR_SIZE-1:0]];
 
-    always @(posedge clk_i)
-        pc <= rst_i ? BOOT_ADDR : pc_load_i ? pc_data_i : pc + 1;
+    always @(posedge clk)
+        pc <= rst ? BOOT_ADDR : load ? addr : pc + 1;
 
 endmodule

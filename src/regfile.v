@@ -9,17 +9,17 @@ module regfile
     parameter ADDR_SIZE = 5,
     parameter WORD_SIZE = 32
 )(
-    input clk_i,
+    input clk,
 
-    input  [ADDR_SIZE-1:0] rs_i,
-    output [WORD_SIZE-1:0] rs_data_o,
+    input  [ADDR_SIZE-1:0] rs_addr,
+    output [WORD_SIZE-1:0] rs_data,
 
-    input  [ADDR_SIZE-1:0] rt_i,
-    output [WORD_SIZE-1:0] rt_data_o,
+    input  [ADDR_SIZE-1:0] rt_addr,
+    output [WORD_SIZE-1:0] rt_data,
 
-    input                  rd_en_i,
-    input  [ADDR_SIZE-1:0] rd_i,
-    input  [WORD_SIZE-1:0] rd_data_i
+    input                  rd_en,
+    input  [ADDR_SIZE-1:0] rd_addr,
+    input  [WORD_SIZE-1:0] rd_data
 );
 
     reg [WORD_SIZE-1:0] regs [0:2**ADDR_SIZE-1];
@@ -36,11 +36,11 @@ module regfile
     end
 `endif
 
-    always @(posedge clk_i)
-        if (rd_en_i)
-            regs[rd_i] <= rd_data_i;
+    always @(posedge clk)
+        if (rd_en)
+            regs[rd_addr] <= rd_data;
 
-    assign rs_data_o = regs[rs_i];
-    assign rt_data_o = regs[rt_i];
+    assign rs_data = regs[rs_addr];
+    assign rt_data = regs[rt_addr];
 
 endmodule

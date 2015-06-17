@@ -5,28 +5,24 @@
 `timescale 1ns / 1ps
 
 module decode (
-    input [31:0] ir_i,
-    input rd_sel_i,
+    input [31:0] ir,
+    input rd_addr_sel,
 
-    output [5:0]  opcode_o,
-    output [4:0]  rs_o,
-    output [4:0]  rt_o,
-    output [4:0]  rd_o,
-    output [4:0]  shamt_o,
-    output [5:0]  funct_o,
-    output [31:0] imm_o
+    output [5:0]  opcode,
+    output [4:0]  rs,
+    output [4:0]  rt,
+    output [4:0]  rd,
+    output [4:0]  shamt,
+    output [5:0]  funct,
+    output [31:0] imm
 );
-    wire [4:0] rs = ir_i[25:21]; // first source register
-    wire [4:0] rt = ir_i[20:16]; // second source register
-    wire [4:0] rd = ir_i[15:11]; // destination register
+    assign rs = ir[25:21]; // first source register
+    assign rt = ir[20:16]; // second source register
+    assign rd = rd_addr_sel ? ir[15:11] : rt; // destination register
 
-    assign opcode_o = ir_i[31:26]; // opcode
-    assign shamt_o = ir_i[10:6];   // shift amount (R-type)
-    assign funct_o = ir_i[5:0];    // function code (R-type)
-    assign imm_o = {{16{ir_i[15]}}, ir_i[15:0]}; // immediate (I-type)
-
-    assign rs_o = rs;
-    assign rt_o = rt;
-    assign rd_o = rd_sel_i ? rd : rt;
+    assign opcode = ir[31:26]; // opcode
+    assign shamt = ir[10:6];   // shift amount (R-type)
+    assign funct = ir[5:0];    // function code (R-type)
+    assign imm = {{16{ir[15]}}, ir[15:0]}; // immediate (I-type)
 
 endmodule

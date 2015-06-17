@@ -9,11 +9,11 @@ module memory
     parameter ADDR_SIZE = 5,
     parameter WORD_SIZE = 32
 )(
-    input                  clk_i,
-    input  [ADDR_SIZE-1:0] addr_i,
-    input  [WORD_SIZE-1:0] data_i,
-    input                  wen_i,
-    output [WORD_SIZE-1:0] data_o
+    input                  clk,
+    input  [ADDR_SIZE-1:0] addr,
+    input  [WORD_SIZE-1:0] wdata,
+    input                  wen,
+    output [WORD_SIZE-1:0] rdata
 );
 
     reg [31:0] mem [0:2**ADDR_SIZE-1];
@@ -30,10 +30,10 @@ module memory
     end
 `endif
 
-    always @(posedge clk_i)
-        if (wen_i)
-            mem[addr_i] <= data_i;
+    always @(posedge clk)
+        if (wen)
+            mem[addr] <= wdata;
 
-    assign data_o = mem[addr_i];
+    assign rdata = mem[addr];
 
 endmodule
