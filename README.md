@@ -1,5 +1,5 @@
-MIPS I
-======
+MIPS
+====
 
 Formats
 -------
@@ -29,25 +29,26 @@ Instructions
 
 ### Load and Store
 
- Description      | Instruction  | Operation                         | Format
-------------------|--------------|-----------------------------------|---------
- Load word        | lw  rt,C(rs) | rt = M[rs + C]                    | I-type
- Store word       | sw  rt,C(rs) | M[rs + C] = rt                    | I-type
+ Description      | Instruction  | Operation                        | Format
+------------------|--------------|----------------------------------|---------
+ Load word        | lw  rt,C(rs) | rt = M[rs + C]                   | I-type
+ Store word       | sw  rt,C(rs) | M[rs + C] = rt                   | I-type
 
 ### Arithmetic and Logic
 
- Description      | Instruction  | Operation                         | Format
-------------------|--------------|-----------------------------------|---------
- Add              | add rd,rs,rt | rd = rs + rt                      | R-type
- Subtract         | sub rd,rs,rt | rd = rs - rt                      | R-type
- And              | and rd,rs,rt | rd = rs & rt                      | R-type
- Or               | or  rd,rs,rt | rd = rs \| rt                     | R-type
- Set on less then | slt rd,rs,rt | rd = (rs < rt) ? 1 : 0            | R-type
+ Description      | Instruction   | Operation                        | Format
+------------------|---------------|----------------------------------|---------
+ Add              | add  rd,rs,rt | rd = rs + rt                    | R-type
+ Add immediate    | addi rt,rs,C  | rt = rs + C                     | I-type
+ Subtract         | sub  rd,rs,rt | rd = rs - rt                    | R-type
+ And              | and  rd,rs,rt | rd = rs & rt                    | R-type
+ Or               | or   rd,rs,rt | rd = rs \| rt                   | R-type
+ Set on less then | slt  rd,rs,rt | rd = (rs < rt) ? 1 : 0          | R-type
 
 ### Branch and Jump
 
  Description      | Instruction  | Operation                         | Format
 ------------------|--------------|-----------------------------------|---------
- Branch on equal  | beq rs,rt,C  | pc = (rs == rt) ? pc + 4*C : pc   | I-type
+ Branch on equal  | beq rs,rt,C  | pc = (rs == rt) ? pc + 4 * C : pc | I-type
  Jump             | j   C        | pc = C * 4                        | J-type
 
