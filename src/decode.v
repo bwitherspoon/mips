@@ -23,9 +23,9 @@ module decode (
     output reg [31:0] imm_id_ex,
     output reg        rd_en_id_ex,
     output reg [4:0]  rd_addr_id_ex,
+    output reg        rd_data_sel_id_ex,
     output reg [31:0] rs_data_id_ex,
-    output reg [31:0] rt_data_id_ex,
-    output reg        rd_data_sel_id_ex
+    output reg [31:0] rt_data_id_ex
 );
 
     wire [3:0]  alu_op;
@@ -58,9 +58,9 @@ module decode (
     assign rt_addr = ir_if_id[20:16];                         // second source register
     assign rd_addr = rd_addr_sel ? ir_if_id[15:11] : rt_addr; // destination register
 
-    assign opcode = ir_if_id[31:26];                   // opcode field
-    assign funct = ir_if_id[5:0];                     // function field
-    assign imm = {{16{ir_if_id[15]}}, ir_if_id[15:0]}; // immediate field
+    assign opcode = ir_if_id[31:26];                          // opcode field
+    assign funct = ir_if_id[5:0];                             // function field
+    assign imm = {{16{ir_if_id[15]}}, ir_if_id[15:0]};        // immediate field
 
     // Handle branch and jump instructions early in the pipeline
     assign addr = $signed(pc_if_id) + $signed(imm);
@@ -74,8 +74,8 @@ module decode (
         imm_id_ex         <= imm;
         rd_en_id_ex       <= rd_en;
         rd_addr_id_ex     <= rd_addr;
-        rs_data_id_ex     <= rs_data;
-        rt_data_id_ex     <= rt_data;
+        rs_data_id_ex     <= rs_addr == 5'd0 ? 32'd0 : rs_data;
+        rt_data_id_ex     <= rt_addr == 5'd0 ? 32'd0 : rt_data;
         rd_data_sel_id_ex <= rd_data_sel;
     end
 
