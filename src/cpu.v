@@ -101,13 +101,16 @@ module cpu (
 
     regfile regfile (
         .clk(clk),
+        // wb -> reg
+        .rd_en(rd_en),
         .rd_addr(rd_addr),
         .rd_data(rd_data),
-        .rd_en(rd_en),
-        .rt_addr(rt_addr),
-        .rt_data(rt_data),
+        // id -> reg
         .rs_addr(rs_addr),
-        .rs_data(rs_data)
+        .rt_addr(rt_addr),
+        // reg -> id
+        .rs_data(rs_data),
+        .rt_data(rt_data)
     );
 
     execute execute (

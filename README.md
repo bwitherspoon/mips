@@ -1,8 +1,9 @@
 MIPS
 ====
 
-A single-issue RISC processor with a classic 5-stage pipeline which implements a
-subset of the MIPS R2000 instruction set architecture.
+A single-issue RISC processor with a classic 5-stage pipeline in Verilog (IEEE
+Std 1365-2005). The processor implements a subset of the MIPS R2000 instruction
+set architecture.
 
 Formats
 -------
