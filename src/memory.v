@@ -24,7 +24,7 @@ module memory
     output reg [4:0]           rd_addr_mem_wb,
     output reg                 rd_data_sel_mem_wb
 );
-    // Memory
+
     reg [WORD_SIZE-1:0] mem [0:2**ADDR_SIZE-1];
 
     wire [ADDR_SIZE-1:0] addr = alu_data_ex_mem[ADDR_SIZE-1:0];
@@ -32,7 +32,7 @@ module memory
     integer i;
     initial begin
         for (i = 0; i < 2**ADDR_SIZE; i = i + 1)
-            mem[i] = i;
+            mem[i] = 0;
         rd_en_mem_wb = 0;
     end
 
