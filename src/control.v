@@ -53,7 +53,7 @@ module control (
                         alu_op = `ALU_OP_AND;
                         rd_en = 0;
 `ifndef SYNTHESIS
-                        $display("%0d: Invalid function field value: %h", $time, funct);
+                        $display("%0d: Invalid function field value: 0x%h", $time, funct);
 `endif
                     end
                 endcase
@@ -107,6 +107,9 @@ module control (
                 rd_addr_sel = 0;
                 rd_data_sel = 0;
                 rd_en = 0;
+`ifndef SYNTHESIS
+                $display("%0d: Invalid opcode: 0x%h", $time, opcode);
+`endif
             end
         endcase
 endmodule

@@ -28,7 +28,12 @@ module alu
             `ALU_OP_SUBU: result = a - b;
             `ALU_OP_SLT:  result = a < b ? 1:0;
             `ALU_OP_NOR:  result = ~(a | b);
-            default:      result = 0;
+            default: begin
+                result = 1'bX;
+`ifndef SYNTHESIS
+                $display("%0d: Invalid ALU opcode: 0x%h", $time, opcode);
+`endif
+            end
         endcase
 
 endmodule
