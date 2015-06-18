@@ -1,58 +1,32 @@
 [*]
 [*] GTKWave Analyzer v3.3.65 (w)1999-2015 BSI
-[*] Wed Jun 17 21:07:30 2015
+[*] Thu Jun 18 02:25:01 2015
 [*]
 [dumpfile] "/home/spoonb/repositories/mips/sim/dump.vcd"
-[dumpfile_mtime] "Wed Jun 17 21:02:34 2015"
-[dumpfile_size] 182758
+[dumpfile_mtime] "Thu Jun 18 00:47:57 2015"
+[dumpfile_size] 185076
 [savefile] "/home/spoonb/repositories/mips/sim/dump.gtkw"
-[timestart] 30300
-[size] 1366 704
+[timestart] 0
+[size] 1920 1016
 [pos] -1 -1
-*-17.129915 318400 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-17.129915 418700 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] cpu_tb.
 [treeopen] cpu_tb.cpu.
 [treeopen] cpu_tb.cpu.decode.
 [sst_width] 218
 [signals_width] 248
 [sst_expanded] 1
-[sst_vpaned_height] 179
+[sst_vpaned_height] 288
 @200
 -CPU
 @28
 cpu_tb.cpu.clk
 cpu_tb.cpu.rst
 @200
--Pipeline
-@28
-cpu_tb.cpu.rd_en_id_ex
-cpu_tb.cpu.rd_en_ex_mem
-cpu_tb.cpu.rd_en_mem_wb
-cpu_tb.cpu.rd_en
-cpu_tb.cpu.mem_en_id_ex
-cpu_tb.cpu.mem_en_ex_mem
-@22
-cpu_tb.cpu.rd_addr_id_ex[4:0]
-cpu_tb.cpu.rd_addr_ex_mem[4:0]
-@23
-cpu_tb.cpu.rd_addr[4:0]
-@22
-cpu_tb.cpu.mem_data_mem_wb[31:0]
-cpu_tb.cpu.alu_data_ex_mem[31:0]
-cpu_tb.cpu.alu_data_mem_wb[31:0]
-@200
--Control
-@22
-cpu_tb.cpu.decode.control.opcode[5:0]
-@28
-cpu_tb.cpu.decode.control.rd_en
-@22
-cpu_tb.cpu.decode.control.funct[5:0]
-@200
 -Registers
 @22
-cpu_tb.cpu.pc_if_id[31:0]
-cpu_tb.cpu.ir_if_id[31:0]
++{pc} cpu_tb.cpu.pc_if_id[31:0]
++{ir} cpu_tb.cpu.ir_if_id[31:0]
 cpu_tb.cpu.regfile.\regs_[0][31:0]
 cpu_tb.cpu.regfile.\regs_[1][31:0]
 cpu_tb.cpu.regfile.\regs_[2][31:0]
@@ -66,18 +40,18 @@ cpu_tb.cpu.regfile.\regs_[9][31:0]
 @200
 -Memory
 @22
-cpu_tb.cpu.memory.\mem_[0][31:0]
-cpu_tb.cpu.memory.\mem_[1][31:0]
-cpu_tb.cpu.memory.\mem_[2][31:0]
-cpu_tb.cpu.memory.\mem_[3][31:0]
-cpu_tb.cpu.memory.\mem_[4][31:0]
-cpu_tb.cpu.memory.\mem_[5][31:0]
-cpu_tb.cpu.memory.\mem_[6][31:0]
-cpu_tb.cpu.memory.\mem_[7][31:0]
-cpu_tb.cpu.memory.\mem_[8][31:0]
-cpu_tb.cpu.memory.\mem_[9][31:0]
-cpu_tb.cpu.memory.\mem_[10][31:0]
-cpu_tb.cpu.memory.\mem_[11][31:0]
++{mem[0]} cpu_tb.cpu.memory.\mem_[0][31:0]
++{mem[1]} cpu_tb.cpu.memory.\mem_[1][31:0]
++{mem[2]} cpu_tb.cpu.memory.\mem_[2][31:0]
++{mem[3]} cpu_tb.cpu.memory.\mem_[3][31:0]
++{mem[4]} cpu_tb.cpu.memory.\mem_[4][31:0]
++{mem[5]} cpu_tb.cpu.memory.\mem_[5][31:0]
++{mem[6]} cpu_tb.cpu.memory.\mem_[6][31:0]
++{mem[7]} cpu_tb.cpu.memory.\mem_[7][31:0]
++{mem[8]} cpu_tb.cpu.memory.\mem_[8][31:0]
++{mem[9]} cpu_tb.cpu.memory.\mem_[9][31:0]
++{mem[10]} cpu_tb.cpu.memory.\mem_[10][31:0]
++{mem[11]} cpu_tb.cpu.memory.\mem_[11][31:0]
 cpu_tb.cpu.memory.\mem_[12][31:0]
 cpu_tb.cpu.memory.\mem_[13][31:0]
 cpu_tb.cpu.memory.\mem_[14][31:0]
