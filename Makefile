@@ -35,4 +35,4 @@ clean:
 %.vvp: %_tb.v $(MODULES:%=%.v)
 	$(IVERILOG) -Wall -t vvp -I$(SRCDIR) -o $@ $^
 
-.PHONY: all test clean $(MODULES)
+.PHONY: all test clean wave $(MODULES)

@@ -29,7 +29,7 @@ module cpu_tb;
 
         rst = 1;
         #(CLOCK_PERIOD+1) rst = 0;
-        #(64*CLOCK_PERIOD);
+        #(16*CLOCK_PERIOD);
 
         $display("All tests succeeded.");
         $finish;
