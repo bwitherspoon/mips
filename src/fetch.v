@@ -27,7 +27,7 @@ module fetch
 
     // Pipeline registers
     always @(posedge clk) begin
-        ir_if_id <= rom[pc_if_id[ADDR_SIZE-1:0]];
+        ir_if_id <= rst ? {WORD_SIZE{1'b0}} : rom[pc_if_id[ADDR_SIZE-1:0]];
         pc_if_id <= rst ? BOOT_ADDR : jump ? addr : pc_if_id + 1;
     end
 
