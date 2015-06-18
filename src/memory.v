@@ -42,7 +42,6 @@ module memory
     genvar k;
     for (k = 0; k < 2**ADDR_SIZE; k = k + 1) begin : gen_mem
             assign mem_[k] = mem[k];
-            initial $dumpvars(1, mem_[k]);
     end
 `endif
 

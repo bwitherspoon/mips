@@ -2,7 +2,11 @@
 
 module cpu_tb;
 
-    localparam CLOCKPERIOD = 100; // 100 MHz
+    localparam MEM_SIZE = 1024;
+    localparam REG_SIZE = 32;
+    localparam CLOCK_PERIOD = 10; // 100 MHz
+
+    integer i;
 
     reg clk = 1;
     reg rst;
@@ -12,13 +16,21 @@ module cpu_tb;
         .rst(rst)
     );
 
-    always #(CLOCKPERIOD/2) clk <= ~clk;
+    always #(CLOCK_PERIOD/2) clk <= ~clk;
 
     initial begin
-        $dumpvars(1, cpu, cpu.decode.control, cpu.execute.alu);
+        $dumpfile("cpu.vcd");
+        $dumpvars(1, cpu.clk, cpu.rst);
+        $dumpvars(1, cpu.pc_if_id, cpu.ir_if_id);
+        for (i = 0; i < MEM_SIZE; i = i + 1)
+            $dumpvars(1, cpu.memory.mem_[i]);
+        for (i = 0; i < REG_SIZE; i = i + 1)
+            $dumpvars(1, cpu.regfile.regs_[i]);
+
         rst = 1;
-        #(CLOCKPERIOD+1) rst = 0;
-        #(64*CLOCKPERIOD);
+        #(CLOCK_PERIOD+1) rst = 0;
+        #(64*CLOCK_PERIOD);
+
         $display("All tests succeeded.");
         $finish;
     end

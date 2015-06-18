@@ -30,9 +30,8 @@ module regfile
 `ifndef SYNTHESIS
     wire [WORD_SIZE-1:0] regs_ [0:2**ADDR_SIZE-1];
     genvar k;
-    for (k = 0; k < 2*ADDR_SIZE; k = k + 1) begin : gen_regs
+    for (k = 0; k < 2**ADDR_SIZE; k = k + 1) begin : gen_regs
             assign regs_[k] = regs[k];
-            initial $dumpvars(1, regs_[k]);
     end
 `endif
 

@@ -21,6 +21,9 @@ test: $(MODULES)
 
 $(MODULES): %: $(SIMDIR)/%.vcd
 
+wave: cpu.vcd
+	$(GTKWAVE) $< $(wildcard $(patsubst %.vcd,%.gtkw,$<)) > /dev/null 2>&1 &
+
 clean:
 	-$(RM) $(MODULES:%=$(SIMDIR)/%.vcd) $(MODULES:%=$(SIMDIR)/%.vvp)
 
