@@ -1,10 +1,11 @@
 # A list of all the verilog modules to be included in the build
 MODULES = $(basename $(notdir $(wildcard $(SRCDIR)/*.v)))
 
+ASMDIR ?= asm
 SRCDIR ?= src
 SIMDIR ?= sim
 
-VPATH = $(SRCDIR) $(SIMDIR)
+VPATH = $(SRCDIR) $(SIMDIR) $(ASMDIR)
 
 # Overridable if any of these tools are not in PATH
 GTKWAVE  ?= gtkwave
@@ -15,9 +16,9 @@ VVP 	 ?= vvp
 .SECONDARY: $(MODULES:%=$(SIMDIR)/%.vvp)
 
 # Rules
-all: cpu
+test: cpu.vcd
 
-test: $(MODULES)
+all: $(MODULES)
 
 $(MODULES): %: $(SIMDIR)/%.vcd
 
@@ -29,7 +30,7 @@ clean:
 
 %.vcd: %.vvp
 	@echo
-	cd $(dir $<) && $(VVP) $(notdir $<)
+	$(VVP) $<
 	@echo
 
 %.vvp: %_tb.v $(MODULES:%=%.v)

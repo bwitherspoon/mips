@@ -19,7 +19,7 @@ module cpu_tb;
     always #(CLOCK_PERIOD/2) clk <= ~clk;
 
     initial begin
-        $dumpfile("cpu.vcd");
+        $dumpfile("sim/cpu.vcd");
         $dumpvars(1, cpu.clk, cpu.rst);
         $dumpvars(1, cpu.pc_if_id, cpu.ir_if_id);
         for (i = 0; i < MEM_SIZE; i = i + 1)

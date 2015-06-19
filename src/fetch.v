@@ -8,7 +8,7 @@ module fetch
 #(
     parameter ADDR_SIZE = 10,
     parameter BOOT_ADDR = 32'h00000000,
-    parameter PROG_FILE = "firmware.hex",
+    parameter PROG_FILE = "asm/firmware.hex",
     parameter WORD_SIZE = 32
 )(
     input                      clk,
