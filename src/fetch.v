@@ -8,7 +8,7 @@ module fetch
 #(
     parameter ADDR_SIZE = 10,
     parameter BOOT_ADDR = 32'h00000000,
-    parameter PROG_CODE = "firmware.bin",
+    parameter PROG_FILE = "firmware.hex",
     parameter WORD_SIZE = 32
 )(
     input                      clk,
@@ -21,7 +21,7 @@ module fetch
 
     reg [WORD_SIZE-1:0] rom [0:2**ADDR_SIZE-1];
 
-    initial $readmemb(PROG_CODE, rom, 0, 2**ADDR_SIZE-1);
+    initial $readmemh(PROG_FILE, rom, 0, 2**ADDR_SIZE-1);
 
     initial pc_if_id = BOOT_ADDR;
 
