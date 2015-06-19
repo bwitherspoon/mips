@@ -7,37 +7,37 @@
 module decode (
     input             clk,
 
-    input      [31:0] pc_if_id,
-    input      [31:0] ir_if_id,
-    input      [31:0] rs_data,
-    input      [31:0] rt_data,
+    input      [31:0] pc_id,
+    input      [31:0] ir_id,
+    input      [31:0] reg_s_data,
+    input      [31:0] reg_t_data,
 
     output     [31:0] addr,
-    output     [4:0]  rs_addr,
-    output     [4:0]  rt_addr,
+    output     [4:0]  reg_s_addr,
+    output     [4:0]  reg_t_addr,
     output            jump,
 
-    output reg [3:0]  alu_op_id_ex,
-    output reg        alu_a_sel_id_ex,
-    output reg        alu_b_sel_id_ex,
-    output reg        mem_en_id_ex,
-    output reg [31:0] imm_id_ex,
-    output reg        rd_en_id_ex,
-    output reg [4:0]  rd_addr_id_ex,
-    output reg        rd_data_sel_id_ex,
-    output reg [31:0] rs_data_id_ex,
-    output reg [31:0] rt_data_id_ex
+    output reg [3:0]  alu_op_ex,
+    output reg        alu_a_sel_ex,
+    output reg        alu_b_sel_ex,
+    output reg        mem_we_ex,
+    output reg [31:0] imm_ex,
+    output reg        reg_d_we_ex,
+    output reg [4:0]  reg_d_addr_ex,
+    output reg        reg_d_data_sel_ex,
+    output reg [31:0] reg_s_data_ex,
+    output reg [31:0] reg_t_data_ex
 );
 
     wire [3:0]  alu_op;
     wire        alu_a_sel;
     wire        alu_b_sel;
-    wire        mem_en;
+    wire        mem_we;
     wire [31:0] imm;
-    wire        rd_en;
-    wire [4:0]  rd_addr;
-    wire        rd_addr_sel;
-    wire        rd_data_sel;
+    wire        reg_d_we;
+    wire [4:0]  reg_d_addr;
+    wire        reg_d_addr_sel;
+    wire        reg_d_data_sel;
     wire [5:0]  opcode;
     wire [5:0]  funct;
     wire        equal;
@@ -49,38 +49,37 @@ module decode (
         .alu_op(alu_op),
         .alu_a_sel(alu_a_sel),
         .alu_b_sel(alu_b_sel),
-        .mem_en(mem_en),
+        .mem_we(mem_we),
         .jump(jump),
-        .rd_addr_sel(rd_addr_sel),
-        .rd_data_sel(rd_data_sel),
-        .rd_en(rd_en)
+        .reg_d_addr_sel(reg_d_addr_sel),
+        .reg_d_data_sel(reg_d_data_sel),
+        .reg_d_we(reg_d_we)
     );
 
-    // Fields
-    assign rs_addr = ir_if_id[25:21];                         // first source register
-    assign rt_addr = ir_if_id[20:16];                         // second source register
-    assign rd_addr = rd_addr_sel ? ir_if_id[15:11] : rt_addr; // destination register
+    assign reg_s_addr = ir_id[25:21];
+    assign reg_t_addr = ir_id[20:16];
+    assign reg_d_addr = reg_d_addr_sel ? ir_id[15:11] : reg_t_addr;
 
-    assign opcode = ir_if_id[31:26];                          // opcode field
-    assign funct = ir_if_id[5:0];                             // function field
-    assign imm = {{16{ir_if_id[15]}}, ir_if_id[15:0]};        // immediate field
+    assign opcode = ir_id[31:26];
+    assign funct = ir_id[5:0];
+    assign imm = {{16{ir_id[15]}}, ir_id[15:0]};
 
     // Handle branch and jump instructions early in the pipeline
-    assign addr = $signed(pc_if_id) + $signed(imm);
-    assign equal = rs_data == rt_data;
+    assign addr = $signed(pc_id) + $signed(imm);
+    assign equal = reg_s_data == reg_t_data;
 
     // Pipeline registers
     always @(posedge clk) begin
-        alu_op_id_ex      <= alu_op;
-        alu_a_sel_id_ex   <= alu_a_sel;
-        alu_b_sel_id_ex   <= alu_b_sel;
-        mem_en_id_ex      <= mem_en;
-        imm_id_ex         <= imm;
-        rd_en_id_ex       <= rd_en;
-        rd_addr_id_ex     <= rd_addr;
-        rs_data_id_ex     <= rs_addr == 5'd0 ? 32'd0 : rs_data;
-        rt_data_id_ex     <= rt_addr == 5'd0 ? 32'd0 : rt_data;
-        rd_data_sel_id_ex <= rd_data_sel;
+        alu_op_ex         <= alu_op;
+        alu_a_sel_ex      <= alu_a_sel;
+        alu_b_sel_ex      <= alu_b_sel;
+        mem_we_ex         <= mem_we;
+        imm_ex            <= imm;
+        reg_d_we_ex       <= reg_d_we;
+        reg_d_addr_ex     <= reg_d_addr;
+        reg_s_data_ex     <= reg_s_addr == 5'd0 ? 32'd0 : reg_s_data;
+        reg_t_data_ex     <= reg_t_addr == 5'd0 ? 32'd0 : reg_t_data;
+        reg_d_data_sel_ex <= reg_d_data_sel;
     end
 
 endmodule

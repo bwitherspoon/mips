@@ -11,15 +11,15 @@ module regfile
 )(
     input clk,
 
-    input  [ADDR_SIZE-1:0] rs_addr,
-    output [WORD_SIZE-1:0] rs_data,
+    input  [ADDR_SIZE-1:0] s_addr,
+    output [WORD_SIZE-1:0] s_data,
 
-    input  [ADDR_SIZE-1:0] rt_addr,
-    output [WORD_SIZE-1:0] rt_data,
+    input  [ADDR_SIZE-1:0] t_addr,
+    output [WORD_SIZE-1:0] t_data,
 
-    input                  rd_en,
-    input  [ADDR_SIZE-1:0] rd_addr,
-    input  [WORD_SIZE-1:0] rd_data
+    input                  d_we,
+    input  [ADDR_SIZE-1:0] d_addr,
+    input  [WORD_SIZE-1:0] d_data
 );
 
     reg [WORD_SIZE-1:0] regs [0:2**ADDR_SIZE-1];
@@ -36,10 +36,10 @@ module regfile
 `endif
 
     always @(posedge clk)
-        if (rd_en)
-            regs[rd_addr] <= rd_data;
+        if (d_we)
+            regs[d_addr] <= d_data;
 
-    assign rs_data = regs[rs_addr];
-    assign rt_data = regs[rt_addr];
+    assign s_data = regs[s_addr];
+    assign t_data = regs[t_addr];
 
 endmodule

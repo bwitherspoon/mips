@@ -13,22 +13,22 @@ module memory
     // mem -> gpio
     inout      [WORD_SIZE-1:0] gpio,
     // mem -> ex
-    input      [WORD_SIZE-1:0] alu_data_ex_mem,
-    input                      rd_en_ex_mem,
-    input      [4:0]           rd_addr_ex_mem,
-    input                      rd_data_sel_ex_mem,
-    input      [WORD_SIZE-1:0] rt_data_ex_mem,
-    input                      mem_en_ex_mem,
+    input      [WORD_SIZE-1:0] alu_data_mem,
+    input                      reg_d_we_mem,
+    input      [4:0]           reg_d_addr_mem,
+    input                      reg_d_data_sel_mem,
+    input      [WORD_SIZE-1:0] reg_t_data_mem,
+    input                      mem_we_mem,
     // mem -> wb
-    output reg [WORD_SIZE-1:0] alu_data_mem_wb,
-    output reg [WORD_SIZE-1:0] mem_data_mem_wb,
-    output reg                 rd_en_mem_wb,
-    output reg [4:0]           rd_addr_mem_wb,
-    output reg                 rd_data_sel_mem_wb
+    output reg [WORD_SIZE-1:0] alu_data_wb,
+    output reg [WORD_SIZE-1:0] mem_data_wb,
+    output reg                 reg_d_we_wb,
+    output reg [4:0]           reg_d_addr_wb,
+    output reg                 reg_d_data_sel_wb
 );
 
-    wire [ADDR_SIZE-1:0] addr = alu_data_ex_mem[ADDR_SIZE-1:0];
-    wire                 io   = alu_data_ex_mem == 32'hffffffff;
+    wire [ADDR_SIZE-1:0] addr = alu_data_mem[ADDR_SIZE-1:0];
+    wire                 io   = alu_data_mem == 32'hffffffff;
 
     reg [WORD_SIZE-1:0] gpio_reg = {WORD_SIZE{1'b0}};
 
@@ -49,17 +49,17 @@ module memory
 
     always @(posedge clk)
         if (io)
-            gpio_reg <= rt_data_ex_mem;
-        else if (mem_en_ex_mem)
-            mem[addr] <= rt_data_ex_mem;
+            gpio_reg <= reg_t_data_mem;
+        else if (mem_we_mem)
+            mem[addr] <= reg_t_data_mem;
 
     // Pipeline registers
     always @(posedge clk) begin
-        alu_data_mem_wb    <= alu_data_ex_mem;
-        mem_data_mem_wb    <= io ? gpio : mem[addr];
-        rd_en_mem_wb       <= rd_en_ex_mem;
-        rd_addr_mem_wb     <= rd_addr_ex_mem;
-        rd_data_sel_mem_wb <= rd_data_sel_ex_mem;
+        alu_data_wb    <= alu_data_mem;
+        mem_data_wb    <= io ? gpio : mem[addr];
+        reg_d_we_wb       <= reg_d_we_mem;
+        reg_d_addr_wb     <= reg_d_addr_mem;
+        reg_d_data_sel_wb <= reg_d_data_sel_mem;
     end
 
 endmodule

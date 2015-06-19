@@ -33,15 +33,15 @@
 `define ALU_SRA  4'b1110
 `define ALU_SRL  4'b1111
 
-`define ALU_A_SEL_REG   1'b0
+`define ALU_A_SEL_RS    1'b0
 `define ALU_A_SEL_SHAMT 1'b1
 
-`define ALU_B_SEL_REG   1'b0
+`define ALU_A_SEL_RT    1'b0
 `define ALU_B_SEL_IMM   1'b1
 
 // Register file control
-`define RD_SEL_RT 1'b0
-`define RD_SEL_RD 1'b1
+`define REG_D_ADDR_SEL_RT 1'b0
+`define REG_D_ADDR_SEL_RD 1'b1
 
-`define RD_DATA_SEL_ALU 1'b0
-`define RD_DATA_SEL_MEM 1'b1
+`define REG_D_DATA_SEL_ALU 1'b0
+`define REG_D_DATA_SEL_MEM 1'b1

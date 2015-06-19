@@ -24,7 +24,7 @@ module cpu_tb;
     initial begin
         $dumpfile("sim/cpu.vcd");
         $dumpvars(1, cpu.clk, cpu.rst, cpu.gpio);
-        $dumpvars(1, cpu.pc_if_id, cpu.ir_if_id);
+        $dumpvars(1, cpu.pc_id, cpu.ir_id);
         for (i = 0; i < MEM_SIZE; i = i + 1)
             $dumpvars(1, cpu.memory.mem_[i]);
         for (i = 0; i < REG_SIZE; i = i + 1)
