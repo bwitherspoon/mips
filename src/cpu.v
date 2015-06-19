@@ -6,7 +6,8 @@
 
 module cpu (
     input clk,
-    input rst
+    input rst,
+    inout [31:0] gpio
 );
     /*
      *  Control path
@@ -136,6 +137,8 @@ module cpu (
 
     memory memory(
         .clk(clk),
+        // mem -> gpio
+        .gpio(gpio),
         // mem -> ex
         .alu_data_ex_mem(alu_data_ex_mem),
         .rd_en_ex_mem(rd_en_ex_mem),

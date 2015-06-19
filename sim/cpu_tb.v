@@ -11,16 +11,19 @@ module cpu_tb;
     reg clk = 1;
     reg rst;
 
+    wire [31:0] gpio;
+
     cpu cpu (
         .clk(clk),
-        .rst(rst)
+        .rst(rst),
+        .gpio(gpio)
     );
 
     always #(CLOCK_PERIOD/2) clk <= ~clk;
 
     initial begin
         $dumpfile("sim/cpu.vcd");
-        $dumpvars(1, cpu.clk, cpu.rst);
+        $dumpvars(1, cpu.clk, cpu.rst, cpu.gpio);
         $dumpvars(1, cpu.pc_if_id, cpu.ir_if_id);
         for (i = 0; i < MEM_SIZE; i = i + 1)
             $dumpvars(1, cpu.memory.mem_[i]);
