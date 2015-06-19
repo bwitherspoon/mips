@@ -21,13 +21,13 @@ module regfile
     input  [ADDR_SIZE-1:0] rd_addr,
     input  [WORD_SIZE-1:0] rd_data
 );
-    // Registers
+
     reg [WORD_SIZE-1:0] regs [0:2**ADDR_SIZE-1];
 
     integer i;
     initial for (i = 0; i < 2**ADDR_SIZE; i = i + 1) regs[i] = 0;
 
-`ifndef SYNTHESIS
+`ifdef __ICARUS__
     wire [WORD_SIZE-1:0] regs_ [0:2**ADDR_SIZE-1];
     genvar k;
     for (k = 0; k < 2**ADDR_SIZE; k = k + 1) begin : gen_regs

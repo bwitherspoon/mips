@@ -35,13 +35,9 @@ module memory
     reg [WORD_SIZE-1:0] mem [0:2**ADDR_SIZE-1];
 
     integer i;
-    initial begin
-        for (i = 0; i < 2**ADDR_SIZE; i = i + 1)
-            mem[i] = 0;
-        rd_en_mem_wb = 0;
-    end
+    initial for (i = 0; i < 2**ADDR_SIZE; i = i + 1) mem[i] = 0;
 
-`ifndef SYNTHESIS
+`ifdef __ICARUS__
     wire [WORD_SIZE-1:0] mem_ [0:2**ADDR_SIZE-1];
     genvar k;
     for (k = 0; k < 2**ADDR_SIZE; k = k + 1) begin : gen_mem
