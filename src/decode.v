@@ -18,7 +18,8 @@ module decode (
     output            jump,
 
     output reg [3:0]  alu_op_id_ex,
-    output reg        alu_sel_id_ex,
+    output reg        alu_a_sel_id_ex,
+    output reg        alu_b_sel_id_ex,
     output reg        mem_en_id_ex,
     output reg [31:0] imm_id_ex,
     output reg        rd_en_id_ex,
@@ -29,7 +30,8 @@ module decode (
 );
 
     wire [3:0]  alu_op;
-    wire        alu_sel;
+    wire        alu_a_sel;
+    wire        alu_b_sel;
     wire        mem_en;
     wire [31:0] imm;
     wire        rd_en;
@@ -45,7 +47,8 @@ module decode (
         .funct(funct),
         .equal(equal),
         .alu_op(alu_op),
-        .alu_sel(alu_sel),
+        .alu_a_sel(alu_a_sel),
+        .alu_b_sel(alu_b_sel),
         .mem_en(mem_en),
         .jump(jump),
         .rd_addr_sel(rd_addr_sel),
@@ -69,7 +72,8 @@ module decode (
     // Pipeline registers
     always @(posedge clk) begin
         alu_op_id_ex      <= alu_op;
-        alu_sel_id_ex     <= alu_sel;
+        alu_a_sel_id_ex   <= alu_a_sel;
+        alu_b_sel_id_ex   <= alu_b_sel;
         mem_en_id_ex      <= mem_en;
         imm_id_ex         <= imm;
         rd_en_id_ex       <= rd_en;

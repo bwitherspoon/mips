@@ -16,20 +16,28 @@
 `define FUNCT_AND 6'h24
 `define FUNCT_OR  6'h25
 `define FUNCT_SLT 6'h2a
-`define FUNCT_NOP 6'h00
+`define FUNCT_SLL 6'h00
+`define FUNCT_SRA 6'h03
+`define FUNCT_SRL 6'h02
 
 // ALU operations
-`define ALU_OP_AND  4'b0000
-`define ALU_OP_OR   4'b0001
-`define ALU_OP_ADD  4'b0010
-`define ALU_OP_ADDU 4'b0011
-`define ALU_OP_SUBU 4'b0100
-`define ALU_OP_SUB  4'b0110
-`define ALU_OP_SLT  4'b0111
-`define ALU_OP_NOR  4'b1100
+`define ALU_AND  4'b0000
+`define ALU_OR   4'b0001
+`define ALU_ADD  4'b0010
+`define ALU_ADDU 4'b0011
+`define ALU_SUBU 4'b0100
+`define ALU_SUB  4'b0110
+`define ALU_SLT  4'b0111
+`define ALU_NOR  4'b1100
+`define ALU_SLL  4'b1101
+`define ALU_SRA  4'b1110
+`define ALU_SRL  4'b1111
 
-`define ALU_SEL_REG 1'b0
-`define ALU_SEL_IMM 1'b1
+`define ALU_A_SEL_REG   1'b0
+`define ALU_A_SEL_SHAMT 1'b1
+
+`define ALU_B_SEL_REG   1'b0
+`define ALU_B_SEL_IMM   1'b1
 
 // Register file control
 `define RD_SEL_RT 1'b0

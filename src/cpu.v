@@ -15,7 +15,8 @@ module cpu (
 
     // id -> ex
     wire [3:0] alu_op_id_ex;
-    wire       alu_sel_id_ex;
+    wire       alu_a_sel_id_ex;
+    wire       alu_b_sel_id_ex;
     // id -> mem
     wire       mem_en_id_ex;
     wire       mem_en_ex_mem;
@@ -96,7 +97,8 @@ module cpu (
         .rt_data_id_ex(rt_data_id_ex),
         .rd_data_sel_id_ex(rd_data_sel_id_ex),
         .alu_op_id_ex(alu_op_id_ex),
-        .alu_sel_id_ex(alu_sel_id_ex),
+        .alu_a_sel_id_ex(alu_a_sel_id_ex),
+        .alu_b_sel_id_ex(alu_b_sel_id_ex),
         .mem_en_id_ex(mem_en_id_ex)
     );
 
@@ -118,7 +120,8 @@ module cpu (
         .clk(clk),
         // id -> ex
         .alu_op_id_ex(alu_op_id_ex),
-        .alu_sel_id_ex(alu_sel_id_ex),
+        .alu_a_sel_id_ex(alu_a_sel_id_ex),
+        .alu_b_sel_id_ex(alu_b_sel_id_ex),
         .imm_id_ex(imm_id_ex),
         .mem_en_id_ex(mem_en_id_ex),
         .rd_en_id_ex(rd_en_id_ex),

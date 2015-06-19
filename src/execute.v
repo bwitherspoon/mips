@@ -10,7 +10,8 @@ module execute (
     input         clk,
     // id -> ex
     input  [3:0]  alu_op_id_ex,
-    input         alu_sel_id_ex,
+    input         alu_a_sel_id_ex,
+    input         alu_b_sel_id_ex,
     input  [31:0] imm_id_ex,
     input         mem_en_id_ex,
     input         rd_en_id_ex,
@@ -26,10 +27,10 @@ module execute (
     output reg [31:0] rt_data_ex_mem,
     output reg        mem_en_ex_mem
 );
-    wire [4:0]  shamt = imm_id_ex[10:6];
+    wire [31:0] shamt = {27'h0000000, imm_id_ex[10:6]};
 
-    wire [31:0] alu_a = rs_data_id_ex;
-    wire [31:0] alu_b = alu_sel_id_ex ? imm_id_ex : rt_data_id_ex;
+    wire [31:0] alu_a = alu_a_sel_id_ex ? shamt     : rs_data_id_ex;
+    wire [31:0] alu_b = alu_b_sel_id_ex ? imm_id_ex : rt_data_id_ex;
     wire [31:0] alu_data;
 
     alu alu(

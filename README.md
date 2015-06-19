@@ -33,21 +33,24 @@ Instructions
 
 ### Load and Store
 
- Description      | Instruction  | Operation                        | Format
-------------------|--------------|----------------------------------|---------
- Load word        | lw  rt,C(rs) | rt = M[rs + C]                   | I-type
- Store word       | sw  rt,C(rs) | M[rs + C] = rt                   | I-type
+ Description      | Instruction  | Operation                         | Format
+------------------|--------------|-----------------------------------|---------
+ Load word        | lw  rt,C(rs) | rt = M[rs + C]                    | I-type
+ Store word       | sw  rt,C(rs) | M[rs + C] = rt                    | I-type
 
 ### Arithmetic and Logic
 
- Description      | Instruction   | Operation                        | Format
-------------------|---------------|----------------------------------|---------
- Add              | add  rd,rs,rt | rd = rs + rt                    | R-type
- Add immediate    | addi rt,rs,C  | rt = rs + C                     | I-type
- Subtract         | sub  rd,rs,rt | rd = rs - rt                    | R-type
- And              | and  rd,rs,rt | rd = rs & rt                    | R-type
- Or               | or   rd,rs,rt | rd = rs \| rt                   | R-type
- Set on less then | slt  rd,rs,rt | rd = (rs < rt) ? 1 : 0          | R-type
+ Description            | Instruction      | Operation                | Format
+------------------------|------------------|--------------------------|---------
+ Add                    | add  rd,rs,rt    | rd = rs + rt             | R-type
+ Add immediate          | addi rt,rs,C     | rt = rs + C              | I-type
+ Subtract               | sub  rd,rs,rt    | rd = rs - rt             | R-type
+ And                    | and  rd,rs,rt    | rd = rs & rt             | R-type
+ Or                     | or   rd,rs,rt    | rd = rs \| rt            | R-type
+ Set on less then       | slt  rd,rs,rt    | rd = (rs < rt) ? 1 : 0   | R-type
+ Shift left logical     | sll  rd,rt,shamt | rd = rt << shamt         | R-type
+ Shift right arithmetic | sra  rd,rt,shamt | rd = rt >>> shamt        | R-type
+ Shift right logical    | srl  rd,rt,shamt | rd = rt >> shamt         | R-type
 
 ### Branch and Jump
 
