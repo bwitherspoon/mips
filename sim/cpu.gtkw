@@ -1,20 +1,20 @@
 [*]
 [*] GTKWave Analyzer v3.3.65 (w)1999-2015 BSI
-[*] Fri Jun 19 10:30:43 2015
+[*] Sat Jun 20 03:09:39 2015
 [*]
 [dumpfile] "/home/spoonb/repositories/mips/sim/cpu.vcd"
-[dumpfile_mtime] "Fri Jun 19 10:29:11 2015"
-[dumpfile_size] 171764
+[dumpfile_mtime] "Sat Jun 20 03:08:43 2015"
+[dumpfile_size] 171297
 [savefile] "/home/spoonb/repositories/mips/sim/cpu.gtkw"
-[timestart] 31370
+[timestart] 0
 [size] 1366 704
-[pos] -1 -1
+[pos] -1714 68
 *-14.267264 84800 84800 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] cpu_tb.
 [treeopen] cpu_tb.cpu.
 [treeopen] cpu_tb.cpu.memory.
 [sst_width] 218
-[signals_width] 178
+[signals_width] 302
 [sst_expanded] 1
 [sst_vpaned_height] 288
 @200
@@ -24,49 +24,13 @@ cpu_tb.cpu.clk
 cpu_tb.cpu.rst
 @200
 -GPIO
-@23
+@22
 cpu_tb.cpu.gpio[31:0]
 @200
 -Registers
 @22
-+{pc} cpu_tb.cpu.pc_if_id[31:0]
-@c00022
-+{ir} cpu_tb.cpu.ir_if_id[31:0]
-@28
-(0)cpu_tb.cpu.ir_if_id[31:0]
-(1)cpu_tb.cpu.ir_if_id[31:0]
-(2)cpu_tb.cpu.ir_if_id[31:0]
-(3)cpu_tb.cpu.ir_if_id[31:0]
-(4)cpu_tb.cpu.ir_if_id[31:0]
-(5)cpu_tb.cpu.ir_if_id[31:0]
-(6)cpu_tb.cpu.ir_if_id[31:0]
-(7)cpu_tb.cpu.ir_if_id[31:0]
-(8)cpu_tb.cpu.ir_if_id[31:0]
-(9)cpu_tb.cpu.ir_if_id[31:0]
-(10)cpu_tb.cpu.ir_if_id[31:0]
-(11)cpu_tb.cpu.ir_if_id[31:0]
-(12)cpu_tb.cpu.ir_if_id[31:0]
-(13)cpu_tb.cpu.ir_if_id[31:0]
-(14)cpu_tb.cpu.ir_if_id[31:0]
-(15)cpu_tb.cpu.ir_if_id[31:0]
-(16)cpu_tb.cpu.ir_if_id[31:0]
-(17)cpu_tb.cpu.ir_if_id[31:0]
-(18)cpu_tb.cpu.ir_if_id[31:0]
-(19)cpu_tb.cpu.ir_if_id[31:0]
-(20)cpu_tb.cpu.ir_if_id[31:0]
-(21)cpu_tb.cpu.ir_if_id[31:0]
-(22)cpu_tb.cpu.ir_if_id[31:0]
-(23)cpu_tb.cpu.ir_if_id[31:0]
-(24)cpu_tb.cpu.ir_if_id[31:0]
-(25)cpu_tb.cpu.ir_if_id[31:0]
-(26)cpu_tb.cpu.ir_if_id[31:0]
-(27)cpu_tb.cpu.ir_if_id[31:0]
-(28)cpu_tb.cpu.ir_if_id[31:0]
-(29)cpu_tb.cpu.ir_if_id[31:0]
-(30)cpu_tb.cpu.ir_if_id[31:0]
-(31)cpu_tb.cpu.ir_if_id[31:0]
-@1401200
--group_end
++{pc} cpu_tb.cpu.pc_id[31:0]
++{ir} cpu_tb.cpu.ir_id[31:0]
 @c00022
 +{regs[0]} cpu_tb.cpu.regfile.\regs_[0][31:0]
 @28
