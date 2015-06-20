@@ -1,9 +1,14 @@
 `timescale 1ns / 1ps
 
-module cpu_tb;
+module cpu_tb
+#(
+    parameter MEM_INIT_FILE = "cpu_tb.mem",
+    parameter VAR_DUMP_FILE = "cpu_tb.vcd"
+);
 
-    localparam MEM_SIZE = 1024;
-    localparam REG_SIZE = 32;
+    localparam MEM_ADDR_WIDTH = 9;
+    localparam REG_ADDR_WIDTH = 5;
+    localparam CPU_DATA_WIDTH = 32;
     localparam CLOCK_PERIOD = 10; // 100 MHz
 
     integer i;
@@ -22,17 +27,18 @@ module cpu_tb;
     always #(CLOCK_PERIOD/2) clk <= ~clk;
 
     initial begin
-        $dumpfile("sim/cpu.vcd");
-        $dumpvars(1, cpu.clk, cpu.rst, cpu.gpio);
+        $readmemh(MEM_INIT_FILE, cpu.ram.mem, 0, 2**MEM_ADDR_WIDTH-1);
+        $dumpfile(VAR_DUMP_FILE);
+        $dumpvars(1, clk, rst, gpio);
         $dumpvars(1, cpu.pc_id, cpu.ir_id);
-        for (i = 0; i < MEM_SIZE; i = i + 1)
-            $dumpvars(1, cpu.memory.mem_[i]);
-        for (i = 0; i < REG_SIZE; i = i + 1)
+        for (i = 0; i < 2**MEM_ADDR_WIDTH; i = i + 1)
+            $dumpvars(1, cpu.ram.mem_[i]);
+        for (i = 0; i < 2**REG_ADDR_WIDTH; i = i + 1)
             $dumpvars(1, cpu.regfile.regs_[i]);
 
         rst = 1;
         #(CLOCK_PERIOD+1) rst = 0;
-        #(16*CLOCK_PERIOD);
+        #(32*CLOCK_PERIOD);
 
         $display("All tests succeeded.");
         $finish;
