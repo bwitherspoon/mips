@@ -14,7 +14,7 @@ module control (
     output reg [3:0] alu_op,
     output reg alu_a_sel,
     output reg alu_b_sel,
-    output reg mem_we,
+    output reg [3:0] mem_we,
     output reg reg_d_we,
     output reg reg_d_addr_sel,
     output reg reg_d_data_sel,
@@ -26,7 +26,7 @@ module control (
         alu_a_sel = `ALU_A_SEL_RS;
         alu_b_sel = `ALU_A_SEL_RT;
         jump = 0;
-        mem_we = 0;
+        mem_we = 4'h0;
         reg_d_addr_sel = `REG_D_ADDR_SEL_RT;
         reg_d_data_sel = `REG_D_DATA_SEL_ALU;
         reg_d_we = 0;
@@ -38,7 +38,7 @@ module control (
                 alu_a_sel = `ALU_A_SEL_RS;
                 alu_b_sel = `ALU_A_SEL_RT;
                 jump = 0;
-                mem_we = 0;
+                mem_we = 4'h0;
                 reg_d_addr_sel = `REG_D_ADDR_SEL_RD;
                 reg_d_data_sel = `REG_D_DATA_SEL_ALU;
                 reg_d_we = 1;
@@ -79,7 +79,7 @@ module control (
                 alu_a_sel = `ALU_A_SEL_RS;
                 alu_b_sel = `ALU_B_SEL_IMM;
                 jump = 0;
-                mem_we = 0;
+                mem_we = 4'h0;
                 reg_d_addr_sel = `REG_D_ADDR_SEL_RT;
                 reg_d_data_sel = `REG_D_DATA_SEL_ALU;
                 reg_d_we = 1;
@@ -89,7 +89,7 @@ module control (
                 alu_a_sel = `ALU_A_SEL_RS;
                 alu_b_sel = `ALU_B_SEL_IMM;
                 jump = 0;
-                mem_we = 0;
+                mem_we = 4'h0;
                 reg_d_addr_sel = `REG_D_ADDR_SEL_RT;
                 reg_d_data_sel = `REG_D_DATA_SEL_MEM;
                 reg_d_we = 1;
@@ -99,7 +99,7 @@ module control (
                 alu_a_sel = `ALU_A_SEL_RS;
                 alu_b_sel = `ALU_B_SEL_IMM;
                 jump = 0;
-                mem_we = 1;
+                mem_we = 4'hF;
                 reg_d_addr_sel = 1'bX;
                 reg_d_data_sel = 1'bX;
                 reg_d_we = 0;
@@ -109,7 +109,7 @@ module control (
                 alu_a_sel = `ALU_A_SEL_RS;
                 alu_b_sel = `ALU_B_SEL_IMM;
                 jump = equal;
-                mem_we = 0;
+                mem_we = 4'h0;
                 reg_d_addr_sel = 1'bX;
                 reg_d_data_sel = 1'bX;
                 reg_d_we = 0;
@@ -119,7 +119,7 @@ module control (
                 alu_a_sel = `ALU_A_SEL_RS;
                 alu_b_sel = `ALU_A_SEL_RT;
                 jump = 0;
-                mem_we = 0;
+                mem_we = 4'h0;
                 reg_d_addr_sel = `REG_D_ADDR_SEL_RT;
                 reg_d_data_sel = `REG_D_DATA_SEL_ALU;
                 reg_d_we = 0;
