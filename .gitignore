@@ -1,1 +1,7 @@
 *.log
+*.vcd
+*.vvp
+*.lxt
+*.lxt2
+*.fst
+*.hex
