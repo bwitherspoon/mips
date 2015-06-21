@@ -1,3 +1,6 @@
+`ifndef DEFINES_VH
+`define DEFINES_VH
+
 // CPU paramters
 `define WORD_SIZE 32
 
@@ -43,5 +46,8 @@
 `define REG_D_ADDR_SEL_RT 1'b0
 `define REG_D_ADDR_SEL_RD 1'b1
 
+
 `define REG_D_DATA_SEL_ALU 1'b0
 `define REG_D_DATA_SEL_MEM 1'b1
+
+`endif // DEFINES_VH
