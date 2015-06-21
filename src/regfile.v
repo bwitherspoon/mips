@@ -30,7 +30,7 @@ module regfile
 
 `ifndef SYNTHESIS
     integer i;
-    initial for (i = 0; i < 2**ADDR_SIZE-2; i = i + 1) regs[i] = 0;
+    initial for (i = 0; i < 2**ADDR_SIZE-1; i = i + 1) regs[i] = 0;
 `ifdef __ICARUS__
     wire [WORD_SIZE-1:0] regs_ [0:2**ADDR_SIZE-1];
     genvar k;
