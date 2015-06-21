@@ -7,32 +7,33 @@
 module memory
 #(
     parameter ADDR_WIDTH = 9,
-    parameter DATA_WIDTH = 32
+    parameter DATA_WIDTH = 32,
+    parameter REGS_DEPTH = 5
 )(
-    input                       clk,
+    input                         clk,
     // mem -> gpio
-    inout      [DATA_WIDTH-1:0] gpio,
+    inout      [DATA_WIDTH-1:0]   gpio,
     // ex -> mem
-    input      [DATA_WIDTH-1:0] alu_data_mem,
-    input                       reg_d_we_mem,
-    input      [4:0]            reg_d_addr_mem,
-    input                       reg_d_data_sel_mem,
-    input      [DATA_WIDTH-1:0] reg_t_data_mem,
-    input      [3:0]            mem_we_mem,
+    input      [DATA_WIDTH-1:0]   alu_data_mem,
+    input                         reg_d_we_mem,
+    input      [REGS_DEPTH-1:0]   reg_d_addr_mem,
+    input                         reg_d_data_sel_mem,
+    input      [DATA_WIDTH-1:0]   reg_t_data_mem,
+    input      [DATA_WIDTH/8-1:0] mem_we_mem,
     // mem -> wb
-    output reg [DATA_WIDTH-1:0] alu_data_wb,
-    output reg [DATA_WIDTH-1:0] mem_data_wb,
-    output reg                  reg_d_we_wb,
-    output reg [4:0]            reg_d_addr_wb,
-    output reg                  reg_d_data_sel_wb,
+    output reg [DATA_WIDTH-1:0]   alu_data_wb,
+    output reg [DATA_WIDTH-1:0]   mem_data_wb,
+    output reg                    reg_d_we_wb,
+    output reg [REGS_DEPTH-1:0]   reg_d_addr_wb,
+    output reg                    reg_d_data_sel_wb,
     // mem -> ram
-    output     [3:0]            ram_we_a,
-    output     [ADDR_WIDTH-1:0] ram_addr_a,
-    output     [DATA_WIDTH-1:0] ram_wdata_a,
-    input      [DATA_WIDTH-1:0] ram_rdata_a
+    output     [DATA_WIDTH/8-1:0] ram_we_a,
+    output     [ADDR_WIDTH-1:0]   ram_addr_a,
+    output     [DATA_WIDTH-1:0]   ram_wdata_a,
+    input      [DATA_WIDTH-1:0]   ram_rdata_a
 );
 
-    wire io = (alu_data_mem == 32'hffffffff) && |mem_we_mem;
+    wire io = (alu_data_mem == 32'hffffffff) && (| mem_we_mem);
 
     reg [DATA_WIDTH-1:0] gpio_reg = {DATA_WIDTH{1'b0}};
 
