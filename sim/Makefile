@@ -30,10 +30,10 @@ cpu_tb.vvp cpu_tb.fst: IVERILOG_FLAGS = -Pcpu_tb.MEM_INIT_FILE=\"$(abspath $(ASM
     					-Pcpu_tb.VAR_DUMP_FILE=\"$(abspath $(SIMDIR)/cpu_tb.vcd)\"
 
 %.vcd: %.vvp
-	$(VVP) $< -vcd
+	$(VVP) -N $< -vcd
 
 %.fst: %.vvp
-	$(VVP) $< -fst
+	$(VVP) -N $< -fst
 
 %.vvp: %.v $(MODULES)
 	$(IVERILOG) $(IVERILOG_FLAGS) -Wall -t vvp -I$(SRCDIR) -o $@ $^
