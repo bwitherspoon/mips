@@ -24,6 +24,7 @@ module regfile
 
     reg [WORD_SIZE-1:0] regs [0:2**ADDR_SIZE-1];
 
+`ifndef SYNTHESIS
     integer i;
     initial for (i = 0; i < 2**ADDR_SIZE; i = i + 1) regs[i] = 0;
 
@@ -33,7 +34,8 @@ module regfile
     for (k = 0; k < 2**ADDR_SIZE; k = k + 1) begin : gen_regs
             assign regs_[k] = regs[k];
     end
-`endif
+`endif // __ICARUS__
+`endif // SYNTHESIS
 
     always @(posedge clk)
         if (d_we)
