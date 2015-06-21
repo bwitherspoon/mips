@@ -8,7 +8,7 @@ module fetch
 #(
     parameter ADDR_WIDTH = 9,
     parameter WORD_WIDTH = 32,
-    parameter BOOT_ADDR  = 32'h00000000,
+    parameter BOOT_ADDR  = 32'h00000000
 )(
     input                       clk,
     input                       rst,
