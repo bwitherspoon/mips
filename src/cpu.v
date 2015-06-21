@@ -41,8 +41,8 @@ module cpu (
     wire [31:0] reg_s_data_ex;
     wire [31:0] reg_t_data_ex;
     // if -> id
-    wire [31:0] pc_id;
-    wire [31:0] ir_id;
+    wire [31:0] pc;
+    wire [31:0] ir;
     // id -> if
     wire [31:0] target;
     // id -> reg
@@ -80,24 +80,24 @@ module cpu (
         .jump(jump),
         .target(target),
         // if -> ram
-        .ram_addr_b(ram_addr_b),
-        .ram_rdata_b(ram_rdata_b),
+        .addr(ram_addr_b),
+        .data(ram_rdata_b),
         // if -> id
-        .pc_id(pc_id),
-        .ir_id(ir_id)
+        .pc(pc),
+        .ir(ir)
     );
 
     decode decode (
         .clk(clk),
         // if -> id
-        .pc_id(pc_id),
-        .ir_id(ir_id),
+        .pc(pc),
+        .ir(ir),
         // reg -> id
         .reg_s_data(reg_s_data),
         .reg_t_data(reg_t_data),
         // id -> if
         .jump(jump),
-        .addr(target),
+        .target(target),
         // id -> reg
         .reg_s_addr(reg_s_addr),
         .reg_t_addr(reg_t_addr),

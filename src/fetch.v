@@ -14,18 +14,19 @@ module fetch
     input                       rst,
     input                       jump,
     input      [WORD_WIDTH-1:0] target,
-    input      [WORD_WIDTH-1:0] ram_rdata_b,
-    output     [ADDR_WIDTH-1:0] ram_addr_b,
-    output reg [WORD_WIDTH-1:0] pc_id,
-    output     [WORD_WIDTH-1:0] ir_id
+    input      [WORD_WIDTH-1:0] data,
+    output     [ADDR_WIDTH-1:0] addr,
+    output reg [WORD_WIDTH-1:0] pc,
+    output reg [WORD_WIDTH-1:0] ir
 );
 
-    initial pc_id = BOOT_ADDR;
+    initial pc = BOOT_ADDR;
 
-    assign ram_addr_b = pc_id[ADDR_WIDTH-1:0];
-    assign ir_id      = rst ? {WORD_WIDTH{1'b0}} : ram_rdata_b;
+    assign addr = rst ? BOOT_ADDR[ADDR_WIDTH-1:0] : pc[ADDR_WIDTH-1:0];
 
-    always @(posedge clk)
-        pc_id <= rst ? BOOT_ADDR : jump ? target : pc_id + 1;
+    always @(posedge clk) begin
+        ir <= rst ? {WORD_WIDTH{1'b0}} : data;
+        pc <= rst ? BOOT_ADDR + 1 : jump ? target : pc + 1;
+    end
 
 endmodule

@@ -22,12 +22,15 @@ module regfile
     input  [WORD_SIZE-1:0] d_data
 );
 
-    reg [WORD_SIZE-1:0] regs [0:2**ADDR_SIZE-1];
+    reg [WORD_SIZE-1:0] regs [0:2**ADDR_SIZE-2];
+
+    wire s_zero = s_addr == {ADDR_SIZE{1'b0}};
+    wire t_zero = t_addr == {ADDR_SIZE{1'b0}};
+    wire d_zero = d_addr == {ADDR_SIZE{1'b0}};
 
 `ifndef SYNTHESIS
     integer i;
-    initial for (i = 0; i < 2**ADDR_SIZE; i = i + 1) regs[i] = 0;
-
+    initial for (i = 0; i < 2**ADDR_SIZE-1; i = i + 1) regs[i] = 0;
 `ifdef __ICARUS__
     wire [WORD_SIZE-1:0] regs_ [0:2**ADDR_SIZE-1];
     genvar k;
@@ -38,10 +41,10 @@ module regfile
 `endif // SYNTHESIS
 
     always @(posedge clk)
-        if (d_we)
-            regs[d_addr] <= d_data;
+        if (d_we && ~d_zero)
+            regs[d_addr - 1] <= d_data;
 
-    assign s_data = regs[s_addr];
-    assign t_data = regs[t_addr];
+    assign s_data = s_zero ? {WORD_SIZE{1'b0}} : regs[s_addr - 1];
+    assign t_data = t_zero ? {WORD_SIZE{1'b0}} : regs[t_addr - 1];
 
 endmodule

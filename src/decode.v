@@ -7,12 +7,12 @@
 module decode (
     input             clk,
 
-    input      [31:0] pc_id,
-    input      [31:0] ir_id,
+    input      [31:0] pc,
+    input      [31:0] ir,
     input      [31:0] reg_s_data,
     input      [31:0] reg_t_data,
 
-    output     [31:0] addr,
+    output     [31:0] target,
     output     [4:0]  reg_s_addr,
     output     [4:0]  reg_t_addr,
     output            jump,
@@ -56,16 +56,16 @@ module decode (
         .reg_d_we(reg_d_we)
     );
 
-    assign reg_s_addr = ir_id[25:21];
-    assign reg_t_addr = ir_id[20:16];
-    assign reg_d_addr = reg_d_addr_sel ? ir_id[15:11] : reg_t_addr;
+    assign reg_s_addr = ir[25:21];
+    assign reg_t_addr = ir[20:16];
+    assign reg_d_addr = reg_d_addr_sel ? ir[15:11] : reg_t_addr;
 
-    assign opcode = ir_id[31:26];
-    assign funct = ir_id[5:0];
-    assign imm = {{16{ir_id[15]}}, ir_id[15:0]};
+    assign opcode = ir[31:26];
+    assign funct = ir[5:0];
+    assign imm = {{16{ir[15]}}, ir[15:0]};
 
     // Handle branch and jump instructions early in the pipeline
-    assign addr = $signed(pc_id) + $signed(imm);
+    assign target = $signed(pc) + $signed(imm);
     assign equal = reg_s_data == reg_t_data;
 
     // Pipeline registers
@@ -77,8 +77,8 @@ module decode (
         imm_ex            <= imm;
         reg_d_we_ex       <= reg_d_we;
         reg_d_addr_ex     <= reg_d_addr;
-        reg_s_data_ex     <= reg_s_addr == 5'd0 ? 32'd0 : reg_s_data;
-        reg_t_data_ex     <= reg_t_addr == 5'd0 ? 32'd0 : reg_t_data;
+        reg_s_data_ex     <= reg_s_data;
+        reg_t_data_ex     <= reg_t_data;
         reg_d_data_sel_ex <= reg_d_data_sel;
     end
 
