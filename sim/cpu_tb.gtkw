@@ -1,15 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.65 (w)1999-2015 BSI
-[*] Sun Jun 21 05:09:30 2015
+[*] Sun Jun 21 05:46:32 2015
 [*]
 [dumpfile] "/home/spoonb/repositories/mips/sim/cpu_tb.vcd"
-[dumpfile_mtime] "Sun Jun 21 05:09:00 2015"
-[dumpfile_size] 88371
+[dumpfile_mtime] "Sun Jun 21 05:39:51 2015"
+[dumpfile_size] 94980
 [savefile] "/home/spoonb/repositories/mips/sim/cpu_tb.gtkw"
-[timestart] 0
+[timestart] 112350
 [size] 1366 704
 [pos] -1 -1
-*-14.267264 9260 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-14.267264 176150 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] cpu_tb.
 [treeopen] cpu_tb.cpu.
 [sst_width] 218
@@ -20,10 +20,9 @@
 -CPU
 @28
 cpu_tb.clk
+cpu_tb.rst
 @200
 -GPIO
-@28
-cpu_tb.rst
 @22
 cpu_tb.gpio[31:0]
 @200
