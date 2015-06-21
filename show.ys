@@ -1,3 +1,0 @@
-read_verilog -Isrc/ src/alu.v src/control.v src/cpu.v src/decode.v src/execute.v src/fetch.v src/memory.v src/regfile.v src/write.v
-show cpu;
-shell;
