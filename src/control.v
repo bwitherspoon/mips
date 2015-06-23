@@ -124,7 +124,7 @@ module control (
                 alu_a_sel = 1'bx;
                 alu_b_sel = 1'bx;
                 pc_we = 1'b0;
-                mem_we = 1'b0;
+                mem_we = 4'b0;
                 reg_d_addr_sel = 1'bx;
                 reg_d_data_sel = 1'bx;
                 reg_d_we = 1'b0;
