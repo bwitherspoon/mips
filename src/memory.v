@@ -4,8 +4,7 @@
 
 `timescale 1ns / 1ps
 
-module memory
-#(
+module memory #(
     parameter ADDR_WIDTH = 9,
     parameter DATA_WIDTH = 32,
     parameter REGS_DEPTH = 5

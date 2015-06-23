@@ -6,34 +6,37 @@
 
 `include "defines.vh"
 
-module execute (
-    input             clk,
+module execute #(
+    parameter ADDR_WIDTH = 5,
+    parameter DATA_WIDTH = 32
+)(
+    input                      clk,
     // id -> ex
-    input      [3:0]  alu_op_ex,
-    input             alu_a_sel_ex,
-    input             alu_b_sel_ex,
-    input      [31:0] imm_ex,
-    input      [3:0]  mem_we_ex,
-    input             reg_d_we_ex,
-    input      [4:0]  reg_d_addr_ex,
-    input             reg_d_data_sel_ex,
-    input      [31:0] reg_s_data_ex,
-    input      [31:0] reg_t_data_ex,
+    input      [3:0]            alu_op_ex,
+    input                       alu_a_sel_ex,
+    input                       alu_b_sel_ex,
+    input      [DATA_WIDTH-1:0] imm_ex,
+    input      [3:0]            mem_we_ex,
+    input                       reg_d_we_ex,
+    input      [ADDR_WIDTH-1:0] reg_d_addr_ex,
+    input                       reg_d_data_sel_ex,
+    input      [DATA_WIDTH-1:0] reg_s_data_ex,
+    input      [DATA_WIDTH-1:0] reg_t_data_ex,
     // ex -> mem
-    output reg [31:0] alu_data_mem,
-    output reg        reg_d_we_mem,
-    output reg [4:0]  reg_d_addr_mem,
-    output reg        reg_d_data_sel_mem,
-    output reg [31:0] reg_t_data_mem,
-    output reg [3:0]  mem_we_mem
+    output reg [DATA_WIDTH-1:0] alu_data_mem,
+    output reg                  reg_d_we_mem,
+    output reg [ADDR_WIDTH-1:0] reg_d_addr_mem,
+    output reg                  reg_d_data_sel_mem,
+    output reg [DATA_WIDTH-1:0] reg_t_data_mem,
+    output reg [3:0]            mem_we_mem
 );
 
-    wire [31:0] shamt = {27'h0000000, imm_ex[10:6]};
-    wire [31:0] alu_a = alu_a_sel_ex ? shamt  : reg_s_data_ex;
-    wire [31:0] alu_b = alu_b_sel_ex ? imm_ex : reg_t_data_ex;
-    wire [31:0] alu_data;
+    wire [DATA_WIDTH-1:0] shamt = {27'h0000000, imm_ex[10:6]};
+    wire [DATA_WIDTH-1:0] alu_a = alu_a_sel_ex ? shamt  : reg_s_data_ex;
+    wire [DATA_WIDTH-1:0] alu_b = alu_b_sel_ex ? imm_ex : reg_t_data_ex;
+    wire [DATA_WIDTH-1:0] alu_data;
 
-    alu alu(
+    alu #(.DATA_WIDTH(DATA_WIDTH)) alu (
         .opcode(alu_op_ex),
         .a(alu_a),
         .b(alu_b),

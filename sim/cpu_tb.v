@@ -14,13 +14,13 @@ module cpu_tb
     integer i;
 
     reg clk = 1;
-    reg rst;
+    reg reset;
 
     wire [31:0] gpio;
 
     cpu cpu (
         .clk(clk),
-        .rst(rst),
+        .reset(reset),
         .gpio(gpio)
     );
 
@@ -30,17 +30,16 @@ module cpu_tb
         // Load memory and dump variables
         $readmemh(MEM_INIT_FILE, cpu.ram.mem, 0, 2**MEM_ADDR_WIDTH-1);
         $dumpfile(VAR_DUMP_FILE);
-        $dumpvars(1, clk, rst, gpio);
+        $dumpvars(1, clk, reset, gpio);
         $dumpvars(1, cpu.pc, cpu.ir);
-        $dumpvars(0, cpu);
         for (i = 0; i < 2**MEM_ADDR_WIDTH; i = i + 1)
             $dumpvars(1, cpu.ram.mem_[i]);
         for (i = 0; i < 2**REG_ADDR_WIDTH; i = i + 1)
             $dumpvars(1, cpu.regfile.regs_[i]);
 
         // Reset
-        rst = 1;
-        #(CLOCK_PERIOD+1) rst = 0;
+        reset = 1;
+        #(CLOCK_PERIOD+1) reset = 0;
 
         // Arithmetic
         #(14*CLOCK_PERIOD);

@@ -4,21 +4,20 @@
 
 `timescale 1ns / 1ps
 
-module write
-#(
+module write #(
     parameter ADDR_SIZE = 5,
-    parameter WORD_SIZE = 32
+    parameter DATA_WIDTH = 32
 )(
     // mem -> wb
-    input [WORD_SIZE-1:0]  alu_data_wb,
-    input [WORD_SIZE-1:0]  mem_data_wb,
+    input  [DATA_WIDTH-1:0] alu_data_wb,
+    input  [DATA_WIDTH-1:0] mem_data_wb,
     input                  reg_d_we_wb,
-    input [ADDR_SIZE-1:0]  reg_d_addr_wb,
+    input  [ADDR_SIZE-1:0] reg_d_addr_wb,
     input                  reg_d_data_sel_wb,
     // wb -> reg
     output                 reg_d_we,
     output [ADDR_SIZE-1:0] reg_d_addr,
-    output [WORD_SIZE-1:0] reg_d_data
+    output [DATA_WIDTH-1:0] reg_d_data
 );
 
     assign reg_d_we   = reg_d_we_wb;

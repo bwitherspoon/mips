@@ -6,14 +6,13 @@
 
 `include "defines.vh"
 
-module alu
-#(
-    parameter WORD_SIZE = 32
+module alu #(
+    parameter DATA_WIDTH = 32
 )(
-    input      [3:0]           opcode,
-    input      [WORD_SIZE-1:0] a,
-    input      [WORD_SIZE-1:0] b,
-    output reg [WORD_SIZE-1:0] result
+    input      [3:0]            opcode,
+    input      [DATA_WIDTH-1:0] a,
+    input      [DATA_WIDTH-1:0] b,
+    output reg [DATA_WIDTH-1:0] result
 );
 
     initial result = 0;
@@ -32,9 +31,9 @@ module alu
             `ALU_SRA:  result = $signed(b) >>> a;
             `ALU_SRL:  result = b >> a;
             default: begin
-                result = 32'bX;
+                result = {DATA_WIDTH{1'bx}};
 `ifndef SYNTHESIS
-                $display("%0d: Invalid ALU opcode: 0x%h", $time, opcode);
+                $display("ERROR: [%0d] Invalid ALU opcode: 0x%h", $time, opcode);
 `endif
             end
         endcase

@@ -1,8 +1,12 @@
+/*
+ * Copyright (c) 2015 Brett Witherspoon
+ */
+
 `ifndef DEFINES_VH
 `define DEFINES_VH
 
 // CPU paramters
-`define WORD_SIZE 32
+`define DATA_WIDTH 32
 
 // CPU opcodes
 `define OPCODE_RTYPE 6'b000000

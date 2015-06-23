@@ -4,8 +4,7 @@
 
 `timescale 1ns / 1ps
 
-module ram
-#(
+module ram #(
     parameter ADDR_WIDTH = 9,
     parameter DATA_WIDTH = 32,
     parameter DATA_BYTES = DATA_WIDTH / 8

@@ -12,10 +12,10 @@ module decode (
     input      [31:0] reg_s_data,
     input      [31:0] reg_t_data,
 
-    output     [31:0] target,
+    output     [31:0] pc_data,
     output     [4:0]  reg_s_addr,
     output     [4:0]  reg_t_addr,
-    output            jump,
+    output            pc_we,
 
     output reg [3:0]  alu_op_ex,
     output reg        alu_a_sel_ex,
@@ -40,17 +40,17 @@ module decode (
     wire        reg_d_data_sel;
     wire [5:0]  opcode;
     wire [5:0]  funct;
-    wire        equal;
+    wire        reg_s_t_equal;
 
     control control (
         .opcode(opcode),
         .funct(funct),
-        .equal(equal),
+        .reg_s_t_equal(reg_s_t_equal),
         .alu_op(alu_op),
         .alu_a_sel(alu_a_sel),
         .alu_b_sel(alu_b_sel),
         .mem_we(mem_we),
-        .jump(jump),
+        .pc_we(pc_we),
         .reg_d_addr_sel(reg_d_addr_sel),
         .reg_d_data_sel(reg_d_data_sel),
         .reg_d_we(reg_d_we)
@@ -65,8 +65,8 @@ module decode (
     assign imm = {{16{ir[15]}}, ir[15:0]};
 
     // Handle branch and jump instructions early in the pipeline
-    assign target = $signed(pc) + $signed(imm);
-    assign equal = reg_s_data == reg_t_data;
+    assign pc_data = $signed(pc) + $signed(imm);
+    assign reg_s_t_equal = reg_s_data == reg_t_data;
 
     // Pipeline registers
     always @(posedge clk) begin

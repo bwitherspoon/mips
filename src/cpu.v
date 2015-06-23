@@ -6,7 +6,7 @@
 
 module cpu (
     input        clk,
-    input        rst,
+    input        reset,
     inout [31:0] gpio
 );
     /*
@@ -18,10 +18,10 @@ module cpu (
     wire        alu_a_sel_ex;
     wire        alu_b_sel_ex;
     // id -> mem
-    wire [3:0] mem_we_ex;
-    wire [3:0] mem_we_mem;
+    wire [3:0]  mem_we_ex;
+    wire [3:0]  mem_we_mem;
     // id -> if
-    wire        jump;
+    wire        pc_we;
     // id -> reg
     wire        reg_d_we_ex;
     wire        reg_d_we_mem;
@@ -44,7 +44,7 @@ module cpu (
     wire [31:0] pc;
     wire [31:0] ir;
     // id -> if
-    wire [31:0] target;
+    wire [31:0] pc_data;
     // id -> reg
     wire [4:0]  reg_d_addr_ex;
     wire [4:0]  reg_d_addr_mem;
@@ -70,18 +70,18 @@ module cpu (
     // ram -> mem
     wire [31:0] ram_rdata_a;
     // if -> ram
-    wire [8:0] ram_addr_b;
-    wire [31:0]ram_rdata_b;
+    wire [8:0]  ram_addr_b;
+    wire [31:0] ram_rdata_b;
 
     fetch fetch (
         .clk(clk),
-        .rst(rst),
+        .reset(reset),
         // id -> if
-        .jump(jump),
-        .target(target),
+        .pc_we(pc_we),
+        .pc_data(pc_data),
         // if -> ram
-        .addr(ram_addr_b),
-        .data(ram_rdata_b),
+        .ram_addr(ram_addr_b),
+        .ram_data(ram_rdata_b),
         // if -> id
         .pc(pc),
         .ir(ir)
@@ -96,8 +96,8 @@ module cpu (
         .reg_s_data(reg_s_data),
         .reg_t_data(reg_t_data),
         // id -> if
-        .jump(jump),
-        .target(target),
+        .pc_we(pc_we),
+        .pc_data(pc_data),
         // id -> reg
         .reg_s_addr(reg_s_addr),
         .reg_t_addr(reg_t_addr),
@@ -186,7 +186,7 @@ module cpu (
         .rdata_b(ram_rdata_b)
     );
 
-    write write(
+    write write (
         // mem -> wb
         .alu_data_wb(alu_data_wb),
         .mem_data_wb(mem_data_wb),
