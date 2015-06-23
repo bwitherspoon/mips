@@ -26,6 +26,7 @@ module alu #(
             `ALU_SUB:  result = $signed(a) - $signed(b);
             `ALU_SUBU: result = a - b;
             `ALU_SLT:  result = $signed(a) < $signed(b) ? 1 : 0;
+            `ALU_XOR:  result = a ^ b;
             `ALU_NOR:  result = ~(a | b);
             `ALU_SLL:  result = b << a;
             `ALU_SRA:  result = $signed(b) >>> a;

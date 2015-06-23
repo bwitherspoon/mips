@@ -14,7 +14,7 @@ module execute #(
     // id -> ex
     input      [3:0]            alu_op_ex,
     input      [1:0]            alu_a_sel_ex,
-    input                       alu_b_sel_ex,
+    input      [1:0]            alu_b_sel_ex,
     input      [DATA_WIDTH-1:0] imm_ex,
     input      [3:0]            mem_we_ex,
     input                       reg_d_we_ex,
@@ -31,10 +31,10 @@ module execute #(
     output reg [3:0]            mem_we_mem
 );
 
-    wire [DATA_WIDTH-1:0] shamt = alu_a_sel_ex[1] ? 32'h10 : {27'h0000000, imm_ex[10:6]};
-    wire [DATA_WIDTH-1:0] alu_a = alu_a_sel_ex[0] ? shamt : reg_s_data_ex;
-    wire [DATA_WIDTH-1:0] alu_b = alu_b_sel_ex ? imm_ex : reg_t_data_ex;
+    wire [DATA_WIDTH-1:0] shamt = {27'h0000000, imm_ex[10:6]};
     wire [DATA_WIDTH-1:0] alu_data;
+    reg  [DATA_WIDTH-1:0] alu_a;
+    reg  [DATA_WIDTH-1:0] alu_b;
 
     alu #(.DATA_WIDTH(DATA_WIDTH)) alu (
         .opcode(alu_op_ex),
@@ -42,6 +42,22 @@ module execute #(
         .b(alu_b),
         .result(alu_data)
     );
+
+    always @*
+        case (alu_a_sel_ex)
+            `ALU_A_SEL_RS:    alu_a = reg_s_data_ex;
+            `ALU_A_SEL_SHAMT: alu_a = shamt;
+            `ALU_A_SEL_16:    alu_a = 32'h10;
+            default:          alu_a = {32{1'bx}};
+        endcase
+
+    always @*
+        case (alu_b_sel_ex)
+            `ALU_B_SEL_RT:   alu_b = reg_t_data_ex;
+            `ALU_B_SEL_IMM:  alu_b = imm_ex;
+            `ALU_B_SEL_IMMU: alu_b = {16'h0000, imm_ex[15:0]};
+            default:         alu_b = {32{1'bx}};
+        endcase
 
     // Pipeline registers
     always @(posedge clk) begin

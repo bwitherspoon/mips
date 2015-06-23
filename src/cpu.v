@@ -16,7 +16,7 @@ module cpu (
     // id -> ex
     wire [3:0]  alu_op_ex;
     wire [1:0]  alu_a_sel_ex;
-    wire        alu_b_sel_ex;
+    wire [1:0]  alu_b_sel_ex;
     // id -> mem
     wire [3:0]  mem_we_ex;
     wire [3:0]  mem_we_mem;

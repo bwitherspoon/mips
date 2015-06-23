@@ -19,7 +19,7 @@ module decode (
 
     output reg [3:0]  alu_op_ex,
     output reg [1:0]  alu_a_sel_ex,
-    output reg        alu_b_sel_ex,
+    output reg [1:0]  alu_b_sel_ex,
     output reg [3:0]  mem_we_ex,
     output reg [31:0] imm_ex,
     output reg        reg_d_we_ex,
@@ -31,7 +31,7 @@ module decode (
 
     wire [3:0]  alu_op;
     wire [1:0]  alu_a_sel;
-    wire        alu_b_sel;
+    wire [1:0]  alu_b_sel;
     wire [3:0]  mem_we;
     wire [31:0] imm;
     wire        reg_d_we;

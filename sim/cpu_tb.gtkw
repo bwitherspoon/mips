@@ -1,26 +1,27 @@
 [*]
 [*] GTKWave Analyzer v3.3.65 (w)1999-2015 BSI
-[*] Sun Jun 21 09:01:08 2015
+[*] Tue Jun 23 17:06:44 2015
 [*]
 [dumpfile] "/home/spoonb/repositories/mips/sim/cpu_tb.vcd"
-[dumpfile_mtime] "Sun Jun 21 08:59:24 2015"
-[dumpfile_size] 147132
+[dumpfile_mtime] "Tue Jun 23 11:28:50 2015"
+[dumpfile_size] 89986
 [savefile] "/home/spoonb/repositories/mips/sim/cpu_tb.gtkw"
-[timestart] 231080
-[size] 1366 704
-[pos] -1 -1
+[timestart] 276460
+[size] 1920 1016
+[pos] -1921 26
 *-14.267264 281330 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] cpu_tb.
 [treeopen] cpu_tb.cpu.
 [sst_width] 218
 [signals_width] 193
 [sst_expanded] 1
-[sst_vpaned_height] 190
+[sst_vpaned_height] 305
 @200
 -CPU
 @28
 cpu_tb.clk
-cpu_tb.rst
+@29
+cpu_tb.reset
 @200
 -GPIO
 @22
@@ -78,9 +79,7 @@ cpu_tb.rst
 +{t1} cpu_tb.cpu.regfile.\regs_[8][31:0]
 +{t2} cpu_tb.cpu.regfile.\regs_[9][31:0]
 +{t3} cpu_tb.cpu.regfile.\regs_[10][31:0]
-@23
 +{t4} cpu_tb.cpu.regfile.\regs_[11][31:0]
-@22
 +{t5} cpu_tb.cpu.regfile.\regs_[12][31:0]
 +{t6} cpu_tb.cpu.regfile.\regs_[13][31:0]
 +{t7} cpu_tb.cpu.regfile.\regs_[14][31:0]

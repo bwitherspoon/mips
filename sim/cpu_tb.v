@@ -132,17 +132,25 @@ module cpu_tb
         // Jump`
 
         // Load
-        #(7*CLOCK_PERIOD);
+        #(10*CLOCK_PERIOD);
         if (gpio != 32'h00FF0000) begin
             $write("Load upper immediate test 0 failed - ");
             $write("Expected: %h, Actual: %h\n", 32'h00FF0000, gpio);
             $stop;
         end
 
+        // Arithemtic
+        #(6*CLOCK_PERIOD);
+        if (gpio != 32'h00FFF00C) begin
+            $write("XOR immediate test 0 failed - ");
+            $write("Expected: %h, Actual: %h\n", 32'h00FF0000, gpio);
+            $stop;
+        end
+
         // Store
 
-        #(5*CLOCK_PERIOD);
-        $display("All tests succeeded.");
+        #(25*CLOCK_PERIOD);
+        $display("PASSED");
         $finish;
     end
 

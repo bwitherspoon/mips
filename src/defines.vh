@@ -13,6 +13,7 @@
 `define OPCODE_ADDI  6'b001000
 `define OPCODE_LW    6'b100011
 `define OPCODE_LUI   6'b001111
+`define OPCODE_XORI  6'b001110
 `define OPCODE_SW    6'b101011
 `define OPCODE_BEQ   6'b000100
 `define OPCODE_J     6'b000010
@@ -35,6 +36,7 @@
 `define ALU_SUBU 4'b0100
 `define ALU_SUB  4'b0110
 `define ALU_SLT  4'b0111
+`define ALU_XOR  4'b1000
 `define ALU_NOR  4'b1100
 `define ALU_SLL  4'b1101
 `define ALU_SRA  4'b1110
@@ -44,8 +46,9 @@
 `define ALU_A_SEL_SHAMT 2'b01
 `define ALU_A_SEL_16    2'b11
 
-`define ALU_B_SEL_RT    1'b0
-`define ALU_B_SEL_IMM   1'b1
+`define ALU_B_SEL_RT    2'b00
+`define ALU_B_SEL_IMM   2'b01
+`define ALU_B_SEL_IMMU  2'b11
 
 // Register file control
 `define REG_D_ADDR_SEL_RT 1'b0

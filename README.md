@@ -43,8 +43,9 @@ Instructions
 
  Description            | Instruction      | Operation                | Format
 ------------------------|------------------|--------------------------|---------
- And                    | and  rd,rs,rt    | rd = rs & rt             | R-type
- Or                     | or   rd,rs,rt    | rd = rs \| rt            | R-type
+ AND                    | and  rd,rs,rt    | rd = rs & rt             | R-type
+ OR                     | or   rd,rs,rt    | rd = rs \| rt            | R-type
+ XOR Immediate          | xori rt,rs,imm   | rt = rs ^ imm            | I-type
 
 ### Shifts
 

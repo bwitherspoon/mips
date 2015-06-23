@@ -36,9 +36,15 @@ slt  $t9, $t2,   $t3
 # Branch
 beq  $t4, $t4,   0xC
 # Jump
-#
+# Load immediate
 lui  $t4, 0x00FF
 nop
+nop
+nop
+nop
+nop
+sw   $t4, 0($t0)
+xori $t4,$t4,0xF00C
 nop
 nop
 nop
