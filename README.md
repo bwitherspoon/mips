@@ -22,7 +22,7 @@ Formats
 
 ### J-type
 
-|  31-26  |              25-31                    |
+|  31-26  |               25-0                    |
 |:-------:|:-------------------------------------:|
 | opcode  |               imm                     |
 
@@ -37,6 +37,7 @@ Instructions
  Add                    | add  rd,rs,rt    | rd = rs + rt             | R-type
  Add immediate          | addi rt,rs,C     | rt = rs + C              | I-type
  Subtract               | sub  rd,rs,rt    | rd = rs - rt             | R-type
+ Load upper immediate   | lui  rt,imm      | rt = imm << 16           | I-type
 
 ### Logical
 

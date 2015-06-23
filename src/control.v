@@ -12,7 +12,7 @@ module control (
     input            reg_s_t_equal,
 
     output reg [3:0] alu_op,
-    output reg       alu_a_sel,
+    output reg [1:0] alu_a_sel,
     output reg       alu_b_sel,
     output reg [3:0] mem_we,
     output reg       reg_d_we,
@@ -82,6 +82,16 @@ module control (
             `OPCODE_ADDI: begin
                 alu_op = `ALU_ADD;
                 alu_a_sel = `ALU_A_SEL_RS;
+                alu_b_sel = `ALU_B_SEL_IMM;
+                pc_we = 1'b0;
+                mem_we = 4'h0;
+                reg_d_addr_sel = `REG_D_ADDR_SEL_RT;
+                reg_d_data_sel = `REG_D_DATA_SEL_ALU;
+                reg_d_we = 1;
+            end
+            `OPCODE_LUI: begin
+                alu_op = `ALU_SLL;
+                alu_a_sel = `ALU_A_SEL_16;
                 alu_b_sel = `ALU_B_SEL_IMM;
                 pc_we = 1'b0;
                 mem_we = 4'h0;

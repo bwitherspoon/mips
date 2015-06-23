@@ -40,8 +40,9 @@
 `define ALU_SRA  4'b1110
 `define ALU_SRL  4'b1111
 
-`define ALU_A_SEL_RS    1'b0
-`define ALU_A_SEL_SHAMT 1'b1
+`define ALU_A_SEL_RS    2'b00
+`define ALU_A_SEL_SHAMT 2'b01
+`define ALU_A_SEL_16    2'b11
 
 `define ALU_A_SEL_RT    1'b0
 `define ALU_B_SEL_IMM   1'b1

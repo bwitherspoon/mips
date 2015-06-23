@@ -13,7 +13,7 @@ module execute #(
     input                      clk,
     // id -> ex
     input      [3:0]            alu_op_ex,
-    input                       alu_a_sel_ex,
+    input      [1:0]            alu_a_sel_ex,
     input                       alu_b_sel_ex,
     input      [DATA_WIDTH-1:0] imm_ex,
     input      [3:0]            mem_we_ex,
@@ -31,8 +31,8 @@ module execute #(
     output reg [3:0]            mem_we_mem
 );
 
-    wire [DATA_WIDTH-1:0] shamt = {27'h0000000, imm_ex[10:6]};
-    wire [DATA_WIDTH-1:0] alu_a = alu_a_sel_ex ? shamt  : reg_s_data_ex;
+    wire [DATA_WIDTH-1:0] shamt = alu_a_sel_ex[1] ? 32'h10 : {27'h0000000, imm_ex[10:6]};
+    wire [DATA_WIDTH-1:0] alu_a = alu_a_sel_ex[0] ? shamt : reg_s_data_ex;
     wire [DATA_WIDTH-1:0] alu_b = alu_b_sel_ex ? imm_ex : reg_t_data_ex;
     wire [DATA_WIDTH-1:0] alu_data;
 

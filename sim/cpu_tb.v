@@ -132,10 +132,16 @@ module cpu_tb
         // Jump`
 
         // Load
+        #(7*CLOCK_PERIOD);
+        if (gpio != 32'h00FF0000) begin
+            $write("Load upper immediate test 0 failed - ");
+            $write("Expected: %h, Actual: %h\n", 32'h00FF0000, gpio);
+            $stop;
+        end
 
         // Store
 
-        #(4*CLOCK_PERIOD);
+        #(5*CLOCK_PERIOD);
         $display("All tests succeeded.");
         $finish;
     end
