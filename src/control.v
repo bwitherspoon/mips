@@ -66,7 +66,7 @@ module control (
                         alu_a_sel = `ALU_A_SEL_SHAMT;
                     end
                     default: begin
-                        alu_op = `ALU_SLL;
+                        alu_op = 4'bxxxx;
                         reg_d_we = 0;
 `ifndef SYNTHESIS
                         $display("%0d: Invalid function field value: 0x%h", $time, funct);
@@ -100,8 +100,8 @@ module control (
                 alu_b_sel = `ALU_B_SEL_IMM;
                 jump = 0;
                 mem_we = 4'hF;
-                reg_d_addr_sel = 1'bX;
-                reg_d_data_sel = 1'bX;
+                reg_d_addr_sel = 1'bx;
+                reg_d_data_sel = 1'bx;
                 reg_d_we = 0;
             end
             `OPCODE_BEQ: begin
@@ -110,18 +110,18 @@ module control (
                 alu_b_sel = `ALU_B_SEL_IMM;
                 jump = equal;
                 mem_we = 4'h0;
-                reg_d_addr_sel = 1'bX;
-                reg_d_data_sel = 1'bX;
+                reg_d_addr_sel = 1'bx;
+                reg_d_data_sel = 1'bx;
                 reg_d_we = 0;
             end
             default: begin // invalid (nop)
-                alu_op = `ALU_SLL;
-                alu_a_sel = `ALU_A_SEL_RS;
-                alu_b_sel = `ALU_A_SEL_RT;
+                alu_op = 4'bxxxx;
+                alu_a_sel = 1'bx;
+                alu_b_sel = 1'bx;
                 jump = 0;
-                mem_we = 4'h0;
-                reg_d_addr_sel = `REG_D_ADDR_SEL_RT;
-                reg_d_data_sel = `REG_D_DATA_SEL_ALU;
+                mem_we = 0;
+                reg_d_addr_sel = 1'bx;
+                reg_d_data_sel = 1'bx;
                 reg_d_we = 0;
 `ifndef SYNTHESIS
                 $display("%0d: Invalid opcode: 0x%h", $time, opcode);
