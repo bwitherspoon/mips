@@ -24,7 +24,7 @@ module control (
     initial begin // nop
         alu_op = `ALU_SLL;
         alu_a_sel = `ALU_A_SEL_RS;
-        alu_b_sel = `ALU_A_SEL_RT;
+        alu_b_sel = `ALU_B_SEL_RT;
         pc_we = 1'b0;
         mem_we = 4'h0;
         reg_d_addr_sel = `REG_D_ADDR_SEL_RT;
@@ -36,7 +36,7 @@ module control (
         case (opcode)
             `OPCODE_RTYPE: begin
                 alu_a_sel = `ALU_A_SEL_RS;
-                alu_b_sel = `ALU_A_SEL_RT;
+                alu_b_sel = `ALU_B_SEL_RT;
                 pc_we = 1'b0;
                 mem_we = 4'h0;
                 reg_d_addr_sel = `REG_D_ADDR_SEL_RD;
