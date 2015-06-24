@@ -15,19 +15,26 @@ module fetch #(
     input      [DATA_WIDTH-1:0] pc_data,
     input      [DATA_WIDTH-1:0] ram_data,
     output     [ADDR_WIDTH-1:0] ram_addr,
-    output reg [DATA_WIDTH-1:0] pc,
-    output reg [DATA_WIDTH-1:0] ir
+    output reg [DATA_WIDTH-1:0] pc_id,
+    output reg [DATA_WIDTH-1:0] ir_id
 );
 
-    initial pc = BOOT_ADDR;
-    initial ir = {DATA_WIDTH{1'b0}};
+    reg [DATA_WIDTH-1:0] pc = 0;
 
-    assign ram_addr = reset ? BOOT_ADDR[ADDR_WIDTH-1:0] : pc[ADDR_WIDTH-1:0];
+    initial pc_id = BOOT_ADDR;
+    initial ir_id = 0;
+
+    assign ram_addr = pc[ADDR_WIDTH-1:0];
 
     always @(posedge clk)
-        pc <= reset ? BOOT_ADDR + 1 : pc_we ? pc_data : pc + 1;
-
-    always @(posedge clk)
-        ir <= reset ? {DATA_WIDTH{1'b0}} : ram_data;
+        if (reset) begin
+            pc    <= BOOT_ADDR;
+            pc_id <= 0;
+            ir_id <= 0;;
+        end else begin
+            pc    <= pc_we ? pc_data : pc + 1;;
+            pc_id <= pc;
+            ir_id <= ram_data;
+        end
 
 endmodule

@@ -80,8 +80,8 @@ module cpu (
         .ram_addr(ram_addr_if),
         .ram_data(ram_rdata_if),
         // if -> id
-        .pc(pc_id),
-        .ir(ir_id)
+        .pc_id(pc_id),
+        .ir_id(ir_id)
     );
 
     decode decode (
@@ -173,6 +173,7 @@ module cpu (
 
     ram ram (
         .clk(clk),
+        .reset(reset),
         // mem -> ram
         .we_a(ram_we_mem),
         .addr_a(ram_addr_mem),

@@ -10,6 +10,7 @@ module ram #(
     parameter DATA_BYTES = DATA_WIDTH / 8
 )(
     input                       clk,
+    input                       reset,
     // Port A
     input      [DATA_BYTES-1:0] we_a,
     input      [ADDR_WIDTH-1:0] addr_a,
@@ -41,6 +42,6 @@ module ram #(
 
     // Port B
     always @(posedge clk)
-        rdata_b <= mem[addr_b];
+        rdata_b <= reset ? 0 : mem[addr_b];
 
 endmodule

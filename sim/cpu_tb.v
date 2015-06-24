@@ -42,7 +42,7 @@ module cpu_tb
         #(CLOCK_PERIOD+1) reset = 0;
 
         // Arithmetic
-        #(14*CLOCK_PERIOD);
+        #(15*CLOCK_PERIOD);
         if (gpio != 32'hFFFFFFFF) begin
             $write("Arithmetic test 0 failed - ");
             $write("Expected: %h, Actual: %h\n", 32'hFFFFFFFF, gpio);

@@ -1,21 +1,139 @@
 [*]
 [*] GTKWave Analyzer v3.3.65 (w)1999-2015 BSI
-[*] Wed Jun 24 07:23:44 2015
+[*] Wed Jun 24 18:51:22 2015
 [*]
 [dumpfile] "/home/spoonb/repositories/mips/sim/cpu_tb.vcd"
-[dumpfile_mtime] "Wed Jun 24 07:23:17 2015"
-[dumpfile_size] 91153
+[dumpfile_mtime] "Wed Jun 24 18:51:03 2015"
+[dumpfile_size] 91168
 [savefile] "/home/spoonb/repositories/mips/sim/cpu_tb.gtkw"
-[timestart] 276460
-[size] 1366 704
-[pos] 0 26
-*-14.267264 281330 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[timestart] 52510
+[size] 1920 1016
+[pos] -1 -1
+*-14.267264 161250 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] cpu_tb.
 [treeopen] cpu_tb.cpu.
 [sst_width] 218
 [signals_width] 193
 [sst_expanded] 1
 [sst_vpaned_height] 305
+@200
+-CPU
+@29
+cpu_tb.clk
+@28
+cpu_tb.reset
+@200
+-GPIO
+@22
++{gpio} cpu_tb.gpio[31:0]
+@200
+-Registers
+@22
++{pc} cpu_tb.pc_id[31:0]
++{ir} cpu_tb.ir_id[31:0]
+@c00022
++{at} cpu_tb.cpu.regfile.\regs_[0][31:0]
+@28
+(0)cpu_tb.cpu.regfile.\regs_[0][31:0]
+(1)cpu_tb.cpu.regfile.\regs_[0][31:0]
+(2)cpu_tb.cpu.regfile.\regs_[0][31:0]
+(3)cpu_tb.cpu.regfile.\regs_[0][31:0]
+(4)cpu_tb.cpu.regfile.\regs_[0][31:0]
+(5)cpu_tb.cpu.regfile.\regs_[0][31:0]
+(6)cpu_tb.cpu.regfile.\regs_[0][31:0]
+(7)cpu_tb.cpu.regfile.\regs_[0][31:0]
+(8)cpu_tb.cpu.regfile.\regs_[0][31:0]
+(9)cpu_tb.cpu.regfile.\regs_[0][31:0]
+(10)cpu_tb.cpu.regfile.\regs_[0][31:0]
+(11)cpu_tb.cpu.regfile.\regs_[0][31:0]
+(12)cpu_tb.cpu.regfile.\regs_[0][31:0]
+(13)cpu_tb.cpu.regfile.\regs_[0][31:0]
+(14)cpu_tb.cpu.regfile.\regs_[0][31:0]
+(15)cpu_tb.cpu.regfile.\regs_[0][31:0]
+(16)cpu_tb.cpu.regfile.\regs_[0][31:0]
+(17)cpu_tb.cpu.regfile.\regs_[0][31:0]
+(18)cpu_tb.cpu.regfile.\regs_[0][31:0]
+(19)cpu_tb.cpu.regfile.\regs_[0][31:0]
+(20)cpu_tb.cpu.regfile.\regs_[0][31:0]
+(21)cpu_tb.cpu.regfile.\regs_[0][31:0]
+(22)cpu_tb.cpu.regfile.\regs_[0][31:0]
+(23)cpu_tb.cpu.regfile.\regs_[0][31:0]
+(24)cpu_tb.cpu.regfile.\regs_[0][31:0]
+(25)cpu_tb.cpu.regfile.\regs_[0][31:0]
+(26)cpu_tb.cpu.regfile.\regs_[0][31:0]
+(27)cpu_tb.cpu.regfile.\regs_[0][31:0]
+(28)cpu_tb.cpu.regfile.\regs_[0][31:0]
+(29)cpu_tb.cpu.regfile.\regs_[0][31:0]
+(30)cpu_tb.cpu.regfile.\regs_[0][31:0]
+(31)cpu_tb.cpu.regfile.\regs_[0][31:0]
+@1401200
+-group_end
+@22
++{v0} cpu_tb.cpu.regfile.\regs_[1][31:0]
++{v1} cpu_tb.cpu.regfile.\regs_[2][31:0]
++{a0} cpu_tb.cpu.regfile.\regs_[3][31:0]
++{a1} cpu_tb.cpu.regfile.\regs_[4][31:0]
++{a2} cpu_tb.cpu.regfile.\regs_[5][31:0]
++{a3} cpu_tb.cpu.regfile.\regs_[6][31:0]
++{t0} cpu_tb.cpu.regfile.\regs_[7][31:0]
++{t1} cpu_tb.cpu.regfile.\regs_[8][31:0]
++{t2} cpu_tb.cpu.regfile.\regs_[9][31:0]
++{t3} cpu_tb.cpu.regfile.\regs_[10][31:0]
++{t4} cpu_tb.cpu.regfile.\regs_[11][31:0]
++{t5} cpu_tb.cpu.regfile.\regs_[12][31:0]
++{t6} cpu_tb.cpu.regfile.\regs_[13][31:0]
++{t7} cpu_tb.cpu.regfile.\regs_[14][31:0]
++{s0} cpu_tb.cpu.regfile.\regs_[15][31:0]
++{s1} cpu_tb.cpu.regfile.\regs_[16][31:0]
++{s2} cpu_tb.cpu.regfile.\regs_[17][31:0]
++{s3} cpu_tb.cpu.regfile.\regs_[18][31:0]
++{s4} cpu_tb.cpu.regfile.\regs_[19][31:0]
++{s5} cpu_tb.cpu.regfile.\regs_[20][31:0]
++{s6} cpu_tb.cpu.regfile.\regs_[21][31:0]
++{s7} cpu_tb.cpu.regfile.\regs_[22][31:0]
++{t8} cpu_tb.cpu.regfile.\regs_[23][31:0]
++{t9} cpu_tb.cpu.regfile.\regs_[24][31:0]
++{k0} cpu_tb.cpu.regfile.\regs_[25][31:0]
++{k1} cpu_tb.cpu.regfile.\regs_[26][31:0]
++{gp} cpu_tb.cpu.regfile.\regs_[27][31:0]
++{sp} cpu_tb.cpu.regfile.\regs_[28][31:0]
++{fp} cpu_tb.cpu.regfile.\regs_[29][31:0]
++{ra} cpu_tb.cpu.regfile.\regs_[30][31:0]
+@200
+-Memory
+@22
++{mem[0]} cpu_tb.cpu.ram.\mem_[0][31:0]
++{mem[1]} cpu_tb.cpu.ram.\mem_[1][31:0]
++{mem[2]} cpu_tb.cpu.ram.\mem_[2][31:0]
++{mem[3]} cpu_tb.cpu.ram.\mem_[3][31:0]
++{mem[4]} cpu_tb.cpu.ram.\mem_[4][31:0]
++{mem[5]} cpu_tb.cpu.ram.\mem_[5][31:0]
++{mem[6]} cpu_tb.cpu.ram.\mem_[6][31:0]
++{mem[7]} cpu_tb.cpu.ram.\mem_[7][31:0]
++{mem[8]} cpu_tb.cpu.ram.\mem_[8][31:0]
++{mem[9]} cpu_tb.cpu.ram.\mem_[9][31:0]
++{mem[10]} cpu_tb.cpu.ram.\mem_[10][31:0]
++{mem[11]} cpu_tb.cpu.ram.\mem_[11][31:0]
++{mem[12]} cpu_tb.cpu.ram.\mem_[12][31:0]
++{mem[13]} cpu_tb.cpu.ram.\mem_[13][31:0]
++{mem[14]} cpu_tb.cpu.ram.\mem_[14][31:0]
++{mem[15]} cpu_tb.cpu.ram.\mem_[15][31:0]
++{mem[16]} cpu_tb.cpu.ram.\mem_[16][31:0]
++{mem[17]} cpu_tb.cpu.ram.\mem_[17][31:0]
++{mem[18]} cpu_tb.cpu.ram.\mem_[18][31:0]
++{mem[19]} cpu_tb.cpu.ram.\mem_[19][31:0]
++{mem[20]} cpu_tb.cpu.ram.\mem_[20][31:0]
++{mem[21]} cpu_tb.cpu.ram.\mem_[21][31:0]
++{mem[22]} cpu_tb.cpu.ram.\mem_[22][31:0]
++{mem[23]} cpu_tb.cpu.ram.\mem_[23][31:0]
++{mem[24]} cpu_tb.cpu.ram.\mem_[24][31:0]
++{mem[25]} cpu_tb.cpu.ram.\mem_[25][31:0]
++{mem[26]} cpu_tb.cpu.ram.\mem_[26][31:0]
++{mem[27]} cpu_tb.cpu.ram.\mem_[27][31:0]
++{mem[28]} cpu_tb.cpu.ram.\mem_[28][31:0]
++{mem[29]} cpu_tb.cpu.ram.\mem_[29][31:0]
++{mem[30]} cpu_tb.cpu.ram.\mem_[30][31:0]
++{mem[31]} cpu_tb.cpu.ram.\mem_[31][31:0]
 @200
 -CPU
 @28
