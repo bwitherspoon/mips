@@ -7,15 +7,15 @@
 module decode (
     input             clk,
 
-    input      [31:0] pc,
-    input      [31:0] ir,
-    input      [31:0] reg_s_data,
-    input      [31:0] reg_t_data,
+    input      [31:0] pc_id,
+    input      [31:0] ir_id,
+    input      [31:0] reg_s_data_id,
+    input      [31:0] reg_t_data_id,
 
-    output     [31:0] pc_data,
-    output     [4:0]  reg_s_addr,
-    output     [4:0]  reg_t_addr,
-    output            pc_we,
+    output            pc_we_id,
+    output     [31:0] pc_data_id,
+    output     [4:0]  reg_s_addr_id,
+    output     [4:0]  reg_t_addr_id,
 
     output reg [3:0]  alu_op_ex,
     output reg [1:0]  alu_a_sel_ex,
@@ -50,23 +50,23 @@ module decode (
         .alu_a_sel(alu_a_sel),
         .alu_b_sel(alu_b_sel),
         .mem_we(mem_we),
-        .pc_we(pc_we),
+        .pc_we(pc_we_id),
         .reg_d_addr_sel(reg_d_addr_sel),
         .reg_d_data_sel(reg_d_data_sel),
         .reg_d_we(reg_d_we)
     );
 
-    assign reg_s_addr = ir[25:21];
-    assign reg_t_addr = ir[20:16];
-    assign reg_d_addr = reg_d_addr_sel ? ir[15:11] : reg_t_addr;
+    assign reg_s_addr_id = ir_id[25:21];
+    assign reg_t_addr_id = ir_id[20:16];
+    assign reg_d_addr = reg_d_addr_sel ? ir_id[15:11] : reg_t_addr_id;
 
-    assign opcode = ir[31:26];
-    assign funct = ir[5:0];
-    assign imm = {{16{ir[15]}}, ir[15:0]};
+    assign opcode = ir_id[31:26];
+    assign funct = ir_id[5:0];
+    assign imm = {{16{ir_id[15]}}, ir_id[15:0]};
 
     // Handle branch and jump instructions early in the pipeline
-    assign pc_data = $signed(pc) + $signed(imm);
-    assign reg_s_t_equal = reg_s_data == reg_t_data;
+    assign pc_data_id = $signed(pc_id) + $signed(imm);
+    assign reg_s_t_equal = reg_s_data_id == reg_t_data_id;
 
     // Pipeline registers
     always @(posedge clk) begin
@@ -77,8 +77,8 @@ module decode (
         imm_ex            <= imm;
         reg_d_we_ex       <= reg_d_we;
         reg_d_addr_ex     <= reg_d_addr;
-        reg_s_data_ex     <= reg_s_data;
-        reg_t_data_ex     <= reg_t_data;
+        reg_s_data_ex     <= reg_s_data_id;
+        reg_t_data_ex     <= reg_t_data_id;
         reg_d_data_sel_ex <= reg_d_data_sel;
     end
 

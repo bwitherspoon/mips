@@ -31,7 +31,7 @@ module cpu_tb
         $readmemh(MEM_INIT_FILE, cpu.ram.mem, 0, 2**MEM_ADDR_WIDTH-1);
         $dumpfile(VAR_DUMP_FILE);
         $dumpvars(1, clk, reset, gpio);
-        $dumpvars(1, cpu.pc, cpu.ir);
+        $dumpvars(1, cpu.pc_id, cpu.ir_id);
         for (i = 0; i < 2**MEM_ADDR_WIDTH; i = i + 1)
             $dumpvars(1, cpu.ram.mem_[i]);
         for (i = 0; i < 2**REG_ADDR_WIDTH; i = i + 1)

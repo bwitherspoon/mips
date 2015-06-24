@@ -21,13 +21,11 @@ module cpu (
     wire [3:0]  mem_we_ex;
     wire [3:0]  mem_we_mem;
     // id -> if
-    wire        pc_we;
-    // id -> reg
+    wire        pc_we_id;
+    // id -> wb
     wire        reg_d_we_ex;
     wire        reg_d_we_mem;
     wire        reg_d_we_wb;
-    wire        reg_d_we;
-    // id -> wb
     wire        reg_d_data_sel_ex;
     wire        reg_d_data_sel_mem;
     wire        reg_d_data_sel_wb;
@@ -41,22 +39,21 @@ module cpu (
     wire [31:0] reg_s_data_ex;
     wire [31:0] reg_t_data_ex;
     // if -> id
-    wire [31:0] pc;
-    wire [31:0] ir;
+    wire [31:0] pc_id;
+    wire [31:0] ir_id;
     // id -> if
-    wire [31:0] pc_data;
+    wire [31:0] pc_data_id;
     // id -> reg
     wire [4:0]  reg_d_addr_ex;
     wire [4:0]  reg_d_addr_mem;
     wire [4:0]  reg_d_addr_wb;
-    wire [4:0]  reg_d_addr;
-    wire [4:0]  reg_s_addr;
-    wire [4:0]  reg_t_addr;
+    wire [4:0]  reg_s_addr_id;
+    wire [4:0]  reg_t_addr_id;
     // wb -> reg
-    wire [31:0] reg_d_data;
+    wire [31:0] reg_d_data_wb;
     // reg -> id
-    wire [31:0] reg_s_data;
-    wire [31:0] reg_t_data;
+    wire [31:0] reg_s_data_id;
+    wire [31:0] reg_t_data_id;
     // ex -> mem
     wire [31:0] alu_data_mem;
     wire [31:0] reg_t_data_mem;
@@ -64,43 +61,43 @@ module cpu (
     wire [31:0] alu_data_wb;
     wire [31:0] mem_data_wb;
     // mem -> ram
-    wire [3:0]  ram_we_a;
-    wire [8:0]  ram_addr_a;
-    wire [31:0] ram_wdata_a;
+    wire [3:0]  ram_we_mem;
+    wire [8:0]  ram_addr_mem;
+    wire [31:0] ram_wdata_mem;
     // ram -> mem
-    wire [31:0] ram_rdata_a;
+    wire [31:0] ram_rdata_mem;
     // if -> ram
-    wire [8:0]  ram_addr_b;
-    wire [31:0] ram_rdata_b;
+    wire [8:0]  ram_addr_if;
+    wire [31:0] ram_rdata_if;
 
     fetch fetch (
         .clk(clk),
         .reset(reset),
         // id -> if
-        .pc_we(pc_we),
-        .pc_data(pc_data),
+        .pc_we(pc_we_id),
+        .pc_data(pc_data_id),
         // if -> ram
-        .ram_addr(ram_addr_b),
-        .ram_data(ram_rdata_b),
+        .ram_addr(ram_addr_if),
+        .ram_data(ram_rdata_if),
         // if -> id
-        .pc(pc),
-        .ir(ir)
+        .pc(pc_id),
+        .ir(ir_id)
     );
 
     decode decode (
         .clk(clk),
         // if -> id
-        .pc(pc),
-        .ir(ir),
+        .pc_id(pc_id),
+        .ir_id(ir_id),
         // reg -> id
-        .reg_s_data(reg_s_data),
-        .reg_t_data(reg_t_data),
+        .reg_s_data_id(reg_s_data_id),
+        .reg_t_data_id(reg_t_data_id),
         // id -> if
-        .pc_we(pc_we),
-        .pc_data(pc_data),
+        .pc_we_id(pc_we_id),
+        .pc_data_id(pc_data_id),
         // id -> reg
-        .reg_s_addr(reg_s_addr),
-        .reg_t_addr(reg_t_addr),
+        .reg_s_addr_id(reg_s_addr_id),
+        .reg_t_addr_id(reg_t_addr_id),
         // id -> ex
         .imm_ex(imm_ex),
         .reg_d_we_ex(reg_d_we_ex),
@@ -117,15 +114,15 @@ module cpu (
     regfile regfile (
         .clk(clk),
         // wb -> reg
-        .d_we(reg_d_we),
-        .d_addr(reg_d_addr),
-        .d_data(reg_d_data),
+        .d_we(reg_d_we_wb),
+        .d_addr(reg_d_addr_wb),
+        .d_data(reg_d_data_wb),
         // id -> reg
-        .s_addr(reg_s_addr),
-        .t_addr(reg_t_addr),
+        .s_addr(reg_s_addr_id),
+        .t_addr(reg_t_addr_id),
         // reg -> id
-        .s_data(reg_s_data),
-        .t_data(reg_t_data)
+        .s_data(reg_s_data_id),
+        .t_data(reg_t_data_id)
     );
 
     execute execute (
@@ -168,35 +165,31 @@ module cpu (
         .reg_d_addr_wb(reg_d_addr_wb),
         .reg_d_data_sel_wb(reg_d_data_sel_wb),
         // mem -> ram
-        .ram_we_a(ram_we_a),
-        .ram_addr_a(ram_addr_a),
-        .ram_rdata_a(ram_rdata_a),
-        .ram_wdata_a(ram_wdata_a)
+        .ram_we_a(ram_we_mem),
+        .ram_addr_a(ram_addr_mem),
+        .ram_rdata_a(ram_rdata_mem),
+        .ram_wdata_a(ram_wdata_mem)
     );
 
     ram ram (
         .clk(clk),
         // mem -> ram
-        .we_a(ram_we_a),
-        .addr_a(ram_addr_a),
-        .wdata_a(ram_wdata_a),
-        .rdata_a(ram_rdata_a),
+        .we_a(ram_we_mem),
+        .addr_a(ram_addr_mem),
+        .wdata_a(ram_wdata_mem),
+        .rdata_a(ram_rdata_mem),
         // if -> ram
-        .addr_b(ram_addr_b),
-        .rdata_b(ram_rdata_b)
+        .addr_b(ram_addr_if),
+        .rdata_b(ram_rdata_if)
     );
 
     write write (
         // mem -> wb
         .alu_data_wb(alu_data_wb),
         .mem_data_wb(mem_data_wb),
-        .reg_d_we_wb(reg_d_we_wb),
-        .reg_d_addr_wb(reg_d_addr_wb),
         .reg_d_data_sel_wb(reg_d_data_sel_wb),
         // wb -> reg
-        .reg_d_we(reg_d_we),
-        .reg_d_addr(reg_d_addr),
-        .reg_d_data(reg_d_data)
+        .reg_d_data_wb(reg_d_data_wb)
     );
 
 endmodule
