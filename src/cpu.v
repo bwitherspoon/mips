@@ -35,7 +35,7 @@ module cpu (
      */
 
     // id -> ex
-    wire [31:0] imm_ex;
+    wire [15:0] imm_ex;
     wire [31:0] reg_s_data_ex;
     wire [31:0] reg_t_data_ex;
     // if -> id
@@ -49,14 +49,20 @@ module cpu (
     wire [4:0]  reg_d_addr_wb;
     wire [4:0]  reg_s_addr_id;
     wire [4:0]  reg_t_addr_id;
-    // wb -> reg
+    // id -> ex
+    wire [4:0]  reg_s_addr_ex;
+    wire [4:0]  reg_t_addr_ex;
+    // mem -> ex
+    wire [31:0] reg_d_data_mem = alu_data_mem;
+    // wb -> reg / ex
     wire [31:0] reg_d_data_wb;
     // reg -> id
     wire [31:0] reg_s_data_id;
     wire [31:0] reg_t_data_id;
     // ex -> mem
-    wire [31:0] alu_data_mem;
     wire [31:0] reg_t_data_mem;
+    // ex -> mem
+    wire [31:0] alu_data_mem;
     // mem -> wb
     wire [31:0] alu_data_wb;
     wire [31:0] mem_data_wb;
@@ -102,6 +108,8 @@ module cpu (
         .imm_ex(imm_ex),
         .reg_d_we_ex(reg_d_we_ex),
         .reg_d_addr_ex(reg_d_addr_ex),
+        .reg_s_addr_ex(reg_s_addr_ex),
+        .reg_t_addr_ex(reg_t_addr_ex),
         .reg_s_data_ex(reg_s_data_ex),
         .reg_t_data_ex(reg_t_data_ex),
         .reg_d_data_sel_ex(reg_d_data_sel_ex),
@@ -134,10 +142,18 @@ module cpu (
         .imm_ex(imm_ex),
         .mem_we_ex(mem_we_ex),
         .reg_d_we_ex(reg_d_we_ex),
+        .reg_s_addr_ex(reg_s_addr_ex),
+        .reg_t_addr_ex(reg_t_addr_ex),
         .reg_d_addr_ex(reg_d_addr_ex),
         .reg_d_data_sel_ex(reg_d_data_sel_ex),
         .reg_s_data_ex(reg_s_data_ex),
         .reg_t_data_ex(reg_t_data_ex),
+        // mem -> ex
+        .reg_d_data_mem(reg_d_data_mem),
+        // wb -> mem
+        .reg_d_we_wb(reg_d_we_wb),
+        .reg_d_addr_wb(reg_d_addr_wb),
+        .reg_d_data_wb(reg_d_data_wb),
         // ex -> mem
         .alu_data_mem(alu_data_mem),
         .reg_d_we_mem(reg_d_we_mem),

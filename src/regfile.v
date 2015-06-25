@@ -40,7 +40,7 @@ module regfile #(
 `endif // __ICARUS__
 `endif // SYNTHESIS
 
-    always @(posedge clk)
+    always @(negedge clk)
         if (d_we && ~d_zero)
             regs[d_addr - 1] <= d_data;
 

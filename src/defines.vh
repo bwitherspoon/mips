@@ -47,13 +47,20 @@
 `define ALU_A_SEL_16    2'b11
 
 `define ALU_B_SEL_RT    2'b00
-`define ALU_B_SEL_IMM   2'b01
+`define ALU_B_SEL_IMMS  2'b01
 `define ALU_B_SEL_IMMU  2'b11
 
 // Register file control
-`define REG_D_ADDR_SEL_RT 1'b0
-`define REG_D_ADDR_SEL_RD 1'b1
+`define REG_S_DATA_SEL_EX  2'b00
+`define REG_S_DATA_SEL_MEM 2'b01
+`define REG_S_DATA_SEL_WB  2'b10
 
+`define REG_T_DATA_SEL_EX  `REG_S_DATA_SEL_EX
+`define REG_T_DATA_SEL_MEM `REG_S_DATA_SEL_MEM
+`define REG_T_DATA_SEL_WB  `REG_S_DATA_SEL_WB
+
+`define REG_D_ADDR_SEL_RT  1'b0
+`define REG_D_ADDR_SEL_RD  1'b1
 
 `define REG_D_DATA_SEL_ALU 1'b0
 `define REG_D_DATA_SEL_MEM 1'b1

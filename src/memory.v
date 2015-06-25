@@ -32,24 +32,24 @@ module memory #(
     input      [DATA_WIDTH-1:0]   ram_rdata_a
 );
 
-    wire io = (alu_data_mem == 32'hffffffff) && (| mem_we_mem);
+    wire is_gpio = (alu_data_mem == 32'hffffffff) && (| mem_we_mem);
 
     reg [DATA_WIDTH-1:0] gpio_reg = {DATA_WIDTH{1'b0}};
 
     assign gpio = gpio_reg;
 
-    assign ram_we_a    = io ? 4'h0 : mem_we_mem;
+    assign ram_we_a    = is_gpio ? 4'h0 : mem_we_mem;
     assign ram_addr_a  = alu_data_mem[ADDR_WIDTH-1:0];
     assign ram_wdata_a = reg_t_data_mem;
 
     always @(posedge clk)
-        if (io)
+        if (is_gpio)
             gpio_reg <= reg_t_data_mem;
 
     // Pipeline registers
     always @(posedge clk) begin
         alu_data_wb       <= alu_data_mem;
-        mem_data_wb       <= io ? gpio : ram_rdata_a;
+        mem_data_wb       <= is_gpio ? gpio : ram_rdata_a;
         reg_d_we_wb       <= reg_d_we_mem;
         reg_d_addr_wb     <= reg_d_addr_mem;
         reg_d_data_sel_wb <= reg_d_data_sel_mem;

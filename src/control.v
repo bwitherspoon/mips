@@ -82,7 +82,7 @@ module control (
             `OPCODE_ADDI: begin
                 alu_op = `ALU_ADD;
                 alu_a_sel = `ALU_A_SEL_RS;
-                alu_b_sel = `ALU_B_SEL_IMM;
+                alu_b_sel = `ALU_B_SEL_IMMS;
                 pc_we = 1'b0;
                 mem_we = 4'h0;
                 reg_d_addr_sel = `REG_D_ADDR_SEL_RT;
@@ -92,7 +92,7 @@ module control (
             `OPCODE_LUI: begin
                 alu_op = `ALU_SLL;
                 alu_a_sel = `ALU_A_SEL_16;
-                alu_b_sel = `ALU_B_SEL_IMM;
+                alu_b_sel = `ALU_B_SEL_IMMS;
                 pc_we = 1'b0;
                 mem_we = 4'h0;
                 reg_d_addr_sel = `REG_D_ADDR_SEL_RT;
@@ -112,7 +112,7 @@ module control (
             `OPCODE_LW: begin
                 alu_op = `ALU_ADD;
                 alu_a_sel = `ALU_A_SEL_RS;
-                alu_b_sel = `ALU_B_SEL_IMM;
+                alu_b_sel = `ALU_B_SEL_IMMS;
                 pc_we = 1'b0;
                 mem_we = 4'h0;
                 reg_d_addr_sel = `REG_D_ADDR_SEL_RT;
@@ -122,7 +122,7 @@ module control (
             `OPCODE_SW: begin
                 alu_op = `ALU_ADD;
                 alu_a_sel = `ALU_A_SEL_RS;
-                alu_b_sel = `ALU_B_SEL_IMM;
+                alu_b_sel = `ALU_B_SEL_IMMS;
                 pc_we = 1'b0;
                 mem_we = 4'hF;
                 reg_d_addr_sel = 1'bx;
@@ -132,7 +132,7 @@ module control (
             `OPCODE_BEQ: begin
                 alu_op = `ALU_SUB;
                 alu_a_sel = `ALU_A_SEL_RS;
-                alu_b_sel = `ALU_B_SEL_IMM;
+                alu_b_sel = `ALU_B_SEL_IMMS;
                 pc_we = reg_s_t_equal;
                 mem_we = 4'h0;
                 reg_d_addr_sel = 1'bx;
@@ -141,8 +141,8 @@ module control (
             end
             default: begin // invalid
                 alu_op = 4'bxxxx;
-                alu_a_sel = 1'bx;
-                alu_b_sel = 1'bx;
+                alu_a_sel = 2'bx;
+                alu_b_sel = 2'bx;
                 pc_we = 1'b0;
                 mem_we = 4'b0;
                 reg_d_addr_sel = 1'bx;
