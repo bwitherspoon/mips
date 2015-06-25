@@ -36,6 +36,6 @@ cpu_tb.vvp cpu_tb.fst: IVERILOG_FLAGS = -Pcpu_tb.MEM_INIT_FILE=\"$(abspath $(ASM
 	$(VVP) -n $< -fst
 
 %.vvp: %.v $(MODULES)
-	$(IVERILOG) $(IVERILOG_FLAGS) -Wall -t vvp -I$(SRCDIR) -o $@ $^
+	$(IVERILOG) $(IVERILOG_FLAGS) -Wall -y $(SRCDIR) -t vvp -I$(SRCDIR) -o $@ $<
 
 .PHONY: all test $(BENCHES:%.v=%-test) wave clean
