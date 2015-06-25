@@ -16,8 +16,8 @@ module cpu_tb
         input [31:0] expected,
         input [31:0] actual
     );
-        if (expected != actual) begin
-            $display("FAIL: %s - %h != %h", name, expected, actual);
+        if (expected !== actual) begin
+            $display("FAIL: %s - %h !== %h", name, expected, actual);
             $stop;
         end else
             $display("PASS: %s", name);
