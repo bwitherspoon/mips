@@ -23,23 +23,32 @@ module cpu_tb
             $display("PASS: %s", name);
     endtask
 
-    integer i;
+    // Clocking
+    reg clk;
+    initial begin
+        clk <= 1;
+        forever #(CLOCK_PERIOD/2) clk = ~clk;
+    end
 
-    reg clk = 1;
+    // Reset
     reg reset;
+    initial begin
+        reset <= 1;
+        @(posedge clk);
+        #1 reset = 0;
+    end
 
+    // DUT
     wire [31:0] gpio;
-
     cpu cpu (
         .clk(clk),
         .reset(reset),
         .gpio(gpio)
     );
 
-    always #(CLOCK_PERIOD/2) clk <= ~clk;
-
+    // Load memory and dump variables
+    integer i;
     initial begin
-        // Load memory and dump variables
         $readmemh(MEM_INIT_FILE, cpu.ram.mem, 0, 2**MEM_ADDR_WIDTH-1);
         $dumpfile(VAR_DUMP_FILE);
         $dumpvars(1, clk, reset, gpio);
@@ -48,10 +57,11 @@ module cpu_tb
             $dumpvars(1, cpu.ram.mem_[i]);
         for (i = 0; i < 2**REG_ADDR_WIDTH; i = i + 1)
             $dumpvars(1, cpu.regfile.regs_[i]);
+    end
 
-        // Reset
-        reset = 1;
-        #(CLOCK_PERIOD+1) reset = 0;
+    // Test
+    initial begin
+        @(negedge reset);
 
         // Arithmetic
         #(15*CLOCK_PERIOD) verify("addi 0", 32'hFFFFFFFF, gpio);
