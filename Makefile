@@ -1,4 +1,3 @@
-ASMDIR ?= asm
 SIMDIR ?= sim
 
 SUBDIRS = $(ASMDIR) $(SIMDIR)
